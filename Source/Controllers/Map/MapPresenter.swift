@@ -36,12 +36,12 @@ final class MapPresenter: NSObject, MapPresenterType {
         mapView.addAnnotations(builder.buildAnnotation(at: points))
         
         interactor.prepareDataIfNeeded { [weak self] in
-            self?.loadPpintsForCurrentMapRegion()
+            self?.loadPointsForCurrentMapRegion()
         }
     }
     
     func zoomIn() {
-        loadPpintsForCurrentMapRegion()
+        loadPointsForCurrentMapRegion()
     }
     
     func zoomOut() {
@@ -53,12 +53,22 @@ final class MapPresenter: NSObject, MapPresenterType {
         mapView.setCenter(mapView.userLocation.coordinate, animated: true)
     }
     
-    private func loadPpintsForCurrentMapRegion() {
-        guard let mapView = mapView else { return }
-        interactor.loadPoints(for: mapView.region.center, radius: 1000) { [weak self] points in
+    private func loadPointsForCurrentMapRegion() {
+        guard let region = mapView?.region else { return }
+        let distance = visibleRegionRadius(at: region)
+        
+        interactor.loadPoints(for: region.center, radius: Int(distance)) { [weak self] points in
             guard let strongSelf = self else { return }
             strongSelf.mapView?.addAnnotations(strongSelf.builder.buildAnnotation(at: points))
         }
+    }
+    
+    private func visibleRegionRadius(at region: MKCoordinateRegion) -> CLLocationDistance {
+        let centerLocation = CLLocation(latitude: region.center.latitude,
+                                        longitude: region.center.longitude)
+        let distantLocation = CLLocation(latitude: region.center.latitude + region.span.latitudeDelta / 2,
+                                         longitude: region.center.longitude + region.span.longitudeDelta / 2)
+        return centerLocation.distance(from: distantLocation)
     }
     
 }
