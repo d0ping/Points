@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Points" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="XjU-ev-oRH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UQt-Ba-NZ9">
+                                <rect key="frame" x="354" y="392" width="52" height="112"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpw-Q9-hJU">
+                                        <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="HaH-Mo-SdU"/>
+                                            <constraint firstAttribute="width" constant="52" id="WOV-fl-bZC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="zoomInButtonDidSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZeR-wL-87G"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-JD-HGB">
+                                        <rect key="frame" x="0.0" y="60" width="52" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="AGB-Re-wmo"/>
+                                            <constraint firstAttribute="width" constant="52" id="RTq-9d-v0S"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <state key="normal" title="-">
+                                            <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="zoomOutButtonDidSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VV8-6a-6pX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCA-dz-7FL">
+                                <rect key="frame" x="354" y="76" width="52" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="WMv-O4-hAs"/>
+                                    <constraint firstAttribute="height" constant="52" id="zbN-WP-2Io"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <state key="normal" title="L">
+                                    <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonDidSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XLm-Gy-NRE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eCA-dz-7FL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="ASg-KJ-hBu"/>
+                            <constraint firstItem="XjU-ev-oRH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BiM-wP-ivC"/>
+                            <constraint firstAttribute="trailing" secondItem="XjU-ev-oRH" secondAttribute="trailing" id="MDm-e2-air"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eCA-dz-7FL" secondAttribute="trailing" constant="8" id="OsN-0i-hRv"/>
+                            <constraint firstItem="XjU-ev-oRH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="baZ-qk-ZAl"/>
+                            <constraint firstAttribute="bottom" secondItem="XjU-ev-oRH" secondAttribute="bottom" id="e23-98-NRR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UQt-Ba-NZ9" secondAttribute="trailing" constant="8" id="jPf-FU-bz1"/>
+                            <constraint firstItem="UQt-Ba-NZ9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zqE-XJ-Vlg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationButton" destination="eCA-dz-7FL" id="cUa-JN-71O"/>
+                        <outlet property="mapView" destination="XjU-ev-oRH" id="ybv-03-Cl9"/>
+                        <outlet property="zoomInButton" destination="Dpw-Q9-hJU" id="PmX-z2-7gn"/>
+                        <outlet property="zoomOutButton" destination="Brg-JD-HGB" id="kb9-Hj-EFO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
