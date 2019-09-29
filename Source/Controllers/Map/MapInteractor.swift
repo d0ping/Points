@@ -13,6 +13,7 @@ typealias PointListModel = ListModel<PointModel>
 typealias PartnerListModel = ListModel<PartnerModel>
 
 protocol MapInteractorType: class {
+    var partners: [PartnerModel] { get }
     func prepareDataIfNeeded(_ completion: @escaping () -> Void)
     func obtainCachedPoints() -> [PointModel]
     func loadPoints(for location: CLLocationCoordinate2D, radius: Int, completion: @escaping ([PointModel]) -> Void)
@@ -29,8 +30,12 @@ final class MapInteractor: MapInteractorType {
         self.storageService = storageService
     }
     
+    var partners: [PartnerModel] {
+        return storageService.allPartners()
+    }
+    
     func prepareDataIfNeeded(_ completion: @escaping () -> Void) {
-        guard storageService.partnersIsEmpty == false else {
+        guard storageService.partnersIsEmpty else {
             completion()
             return
         }

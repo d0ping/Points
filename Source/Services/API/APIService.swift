@@ -61,7 +61,9 @@ final class APIService: APIServiceType {
                 return handler(.failure(error))
             }
             
-            handler(.success(jsonObject))
+            DispatchQueue.main.async {
+                handler(.success(jsonObject))
+            }
         }
         
         task.resume()

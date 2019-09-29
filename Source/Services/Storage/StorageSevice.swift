@@ -13,6 +13,7 @@ protocol StorageServiceType: class {
     var partnersIsEmpty: Bool { get }
     func appendPoints(_ points: [PointModel])
     func appendPartners(_ partners: [PartnerModel])
+    func allPartners() -> [PartnerModel]
     func allPoints() -> [PointModel]
     func partners(at identifiers: [String]) -> [PartnerModel]
 }
@@ -38,6 +39,11 @@ final class StorageService: StorageServiceType {
         partners.forEach { [weak self] partner in
             self?.save(partner, completion: nil)
         }
+    }
+    
+    func allPartners() -> [PartnerModel] {
+        return dataBase.getObjects(with: EntitySearchable(entityName: PartnerModel.entityName),
+                                   of: PartnerModel.self).map { $0.object }
     }
     
     func allPoints() -> [PointModel] {

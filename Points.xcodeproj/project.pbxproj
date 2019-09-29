@@ -28,11 +28,11 @@
 		A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B0233C00F400F4CE69 /* PointModel.swift */; };
 		A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B2233C020700F4CE69 /* ListModel.swift */; };
 		A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A426990D234000BA0089632C /* DataModel.xcdatamodeld */; };
-		A4EEF8BD23401C900003EAB9 /* PointEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8B923401C900003EAB9 /* PointEntity+CoreDataClass.swift */; };
-		A4EEF8BE23401C900003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8BA23401C900003EAB9 /* PointEntity+CoreDataProperties.swift */; };
-		A4EEF8BF23401C900003EAB9 /* PartnerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8BB23401C900003EAB9 /* PartnerEntity+CoreDataClass.swift */; };
-		A4EEF8C023401C900003EAB9 /* PartnerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8BC23401C900003EAB9 /* PartnerEntity+CoreDataProperties.swift */; };
 		A4EEF8DD234049310003EAB9 /* MapAnnotationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8DC234049310003EAB9 /* MapAnnotationBuilder.swift */; };
+		A4EEF8E82340FB650003EAB9 /* PointEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8E42340FB650003EAB9 /* PointEntity+CoreDataClass.swift */; };
+		A4EEF8E92340FB650003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8E52340FB650003EAB9 /* PointEntity+CoreDataProperties.swift */; };
+		A4EEF8EA2340FB650003EAB9 /* PartnerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8E62340FB650003EAB9 /* PartnerEntity+CoreDataClass.swift */; };
+		A4EEF8EB2340FB650003EAB9 /* PartnerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EEF8E72340FB650003EAB9 /* PartnerEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,11 +59,11 @@
 		A48703C3233952D9009A196A /* APIServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceConfiguration.swift; sourceTree = "<group>"; };
 		A4BCB1B0233C00F400F4CE69 /* PointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointModel.swift; sourceTree = "<group>"; };
 		A4BCB1B2233C020700F4CE69 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
-		A4EEF8B923401C900003EAB9 /* PointEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4EEF8BA23401C900003EAB9 /* PointEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4EEF8BB23401C900003EAB9 /* PartnerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartnerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4EEF8BC23401C900003EAB9 /* PartnerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartnerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A4EEF8DC234049310003EAB9 /* MapAnnotationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationBuilder.swift; sourceTree = "<group>"; };
+		A4EEF8E42340FB650003EAB9 /* PointEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A4EEF8E52340FB650003EAB9 /* PointEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A4EEF8E62340FB650003EAB9 /* PartnerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartnerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A4EEF8E72340FB650003EAB9 /* PartnerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartnerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +98,10 @@
 		A426990C2340009B0089632C /* Entitys */ = {
 			isa = PBXGroup;
 			children = (
-				A4EEF8B923401C900003EAB9 /* PointEntity+CoreDataClass.swift */,
-				A4EEF8BA23401C900003EAB9 /* PointEntity+CoreDataProperties.swift */,
-				A4EEF8BB23401C900003EAB9 /* PartnerEntity+CoreDataClass.swift */,
-				A4EEF8BC23401C900003EAB9 /* PartnerEntity+CoreDataProperties.swift */,
+				A4EEF8E42340FB650003EAB9 /* PointEntity+CoreDataClass.swift */,
+				A4EEF8E52340FB650003EAB9 /* PointEntity+CoreDataProperties.swift */,
+				A4EEF8E62340FB650003EAB9 /* PartnerEntity+CoreDataClass.swift */,
+				A4EEF8E72340FB650003EAB9 /* PartnerEntity+CoreDataProperties.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -295,27 +295,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				A471880E233A7516004FF2E0 /* AppProvider.swift in Sources */,
-				A4EEF8BF23401C900003EAB9 /* PartnerEntity+CoreDataClass.swift in Sources */,
 				A471880C233A7334004FF2E0 /* AppScreenFactory.swift in Sources */,
 				A48703C023394D39009A196A /* MapViewController.swift in Sources */,
 				A459BD7D2339624800D642A1 /* APIEndpoint.swift in Sources */,
+				A4EEF8EB2340FB650003EAB9 /* PartnerEntity+CoreDataProperties.swift in Sources */,
+				A4EEF8E92340FB650003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */,
 				A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */,
 				A4269907233FEBF10089632C /* MapInteractor.swift in Sources */,
+				A4EEF8E82340FB650003EAB9 /* PointEntity+CoreDataClass.swift in Sources */,
 				A48703BC2337FAC6009A196A /* APIService.swift in Sources */,
 				A459BD6023395B1000D642A1 /* MapPresenter.swift in Sources */,
 				A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */,
-				A4EEF8BE23401C900003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */,
 				A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */,
 				A48703BE2337FB17009A196A /* StorageSevice.swift in Sources */,
 				A426990B233FFC9D0089632C /* PersistDataBase.swift in Sources */,
-				A4EEF8BD23401C900003EAB9 /* PointEntity+CoreDataClass.swift in Sources */,
-				A4EEF8C023401C900003EAB9 /* PartnerEntity+CoreDataProperties.swift in Sources */,
 				A4269905233FE4540089632C /* PartnerModel.swift in Sources */,
 				A4718810233A7B2F004FF2E0 /* ViewControllerExtension.swift in Sources */,
 				A4718813233A815B004FF2E0 /* LocationService.swift in Sources */,
 				A48703C2233951B9009A196A /* AppServiceFactory.swift in Sources */,
 				A4EEF8DD234049310003EAB9 /* MapAnnotationBuilder.swift in Sources */,
 				A48703C4233952D9009A196A /* APIServiceConfiguration.swift in Sources */,
+				A4EEF8EA2340FB650003EAB9 /* PartnerEntity+CoreDataClass.swift in Sources */,
 				A48703A02337F73F009A196A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

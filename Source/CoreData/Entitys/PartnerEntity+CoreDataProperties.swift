@@ -18,10 +18,10 @@ extension PartnerEntity {
     }
 
     @NSManaged public var icon: String?
-    @NSManaged public var id: String
-    @NSManaged public var name: String
+    @NSManaged public var id: String?
+    @NSManaged public var name: String?
     @NSManaged public var pointType: String?
-    @NSManaged public var url: URL
+    @NSManaged public var url: URL?
     @NSManaged public var points: NSSet?
 
 }

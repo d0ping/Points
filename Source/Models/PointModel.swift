@@ -44,10 +44,10 @@ extension PointModel: ManagedObjectConvertable {
     init(managedObject: NSManagedObject) throws {
         guard let entity = managedObject as? PointEntity else { throw ManagedObjectConvertableError.invalidManagedObjectType }
        
-        self.externalId = entity.externalId
-        self.partnerName = entity.partnerName
-        self.workHours = entity.workHours
-        self.fullAddress = entity.fullAddress
+        self.externalId = entity.externalId ?? ""
+        self.partnerName = entity.partnerName ?? ""
+        self.workHours = entity.workHours ?? ""
+        self.fullAddress = entity.fullAddress ?? ""
         self.location = CLLocationCoordinate2D(latitude: entity.latitude, longitude: entity.longitude)
         self.partner = try entity.partner.map({ try PartnerModel(managedObject: $0) })
     }

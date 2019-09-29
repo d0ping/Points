@@ -31,9 +31,10 @@ final class MapPresenter: NSObject, MapPresenterType {
     func setup(_ mapView: MKMapView) {
         self.mapView = mapView
         mapView.delegate = self
+        mapView.showsUserLocation = true
         
         let points = interactor.obtainCachedPoints()
-        mapView.addAnnotations(builder.buildAnnotation(at: points))
+        addAnnotations(at: points)
         
         interactor.prepareDataIfNeeded { [weak self] in
             self?.loadPointsForCurrentMapRegion()
@@ -59,8 +60,13 @@ final class MapPresenter: NSObject, MapPresenterType {
         
         interactor.loadPoints(for: region.center, radius: Int(distance)) { [weak self] points in
             guard let strongSelf = self else { return }
-            strongSelf.mapView?.addAnnotations(strongSelf.builder.buildAnnotation(at: points))
+            strongSelf.addAnnotations(at: points)
         }
+    }
+    
+    private func addAnnotations(at points: [PointModel]) {
+        guard let mapView = mapView else { return }
+        mapView.addAnnotations(builder.buildAnnotation(at: points, partners: interactor.partners))
     }
     
     private func visibleRegionRadius(at region: MKCoordinateRegion) -> CLLocationDistance {
@@ -70,7 +76,6 @@ final class MapPresenter: NSObject, MapPresenterType {
                                          longitude: region.center.longitude + region.span.longitudeDelta / 2)
         return centerLocation.distance(from: distantLocation)
     }
-    
 }
 
 extension MapPresenter: MKMapViewDelegate {

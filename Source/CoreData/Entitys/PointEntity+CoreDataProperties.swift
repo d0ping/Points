@@ -17,12 +17,12 @@ extension PointEntity {
         return NSFetchRequest<PointEntity>(entityName: "PointEntity")
     }
 
-    @NSManaged public var externalId: String
-    @NSManaged public var fullAddress: String
+    @NSManaged public var externalId: String?
+    @NSManaged public var fullAddress: String?
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var partnerName: String
-    @NSManaged public var workHours: String
+    @NSManaged public var partnerName: String?
+    @NSManaged public var workHours: String?
     @NSManaged public var partner: PartnerEntity?
 
 }

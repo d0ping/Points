@@ -14,19 +14,21 @@ struct PartnerModel: JSONObjectDecodable {
     let name: String
     let picture: String
     let pointType: String
-    let url: URL
+    let url: URL?
     
     init?(jsonObject: JSONObject) {
         guard let id = jsonObject["id"] as? String else { return nil }
         guard let name = jsonObject["name"] as? String else { return nil }
         guard let picture = jsonObject["picture"] as? String else { return nil }
         guard let pointType = jsonObject["pointType"] as? String else { return nil }
-        guard let urlStr = jsonObject["url"] as? String, let url = URL(string: urlStr) else { return nil }
         
         self.id = id
         self.name = name
         self.picture = picture
         self.pointType = pointType
+        
+        let urlStr = jsonObject["url"] as? String ?? ""
+        let url = URL(string: urlStr)
         self.url = url
     }
 }
@@ -40,8 +42,8 @@ extension PartnerModel: ManagedObjectConvertable {
     init(managedObject: NSManagedObject) throws {
         guard let entity = managedObject as? PartnerEntity else { throw ManagedObjectConvertableError.invalidManagedObjectType }
         
-        self.id = entity.id
-        self.name = entity.name
+        self.id = entity.id ?? ""
+        self.name = entity.name ?? ""
         self.picture = entity.icon ?? ""
         self.pointType = entity.pointType ?? ""
         self.url = entity.url
