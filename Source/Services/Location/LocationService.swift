@@ -9,24 +9,53 @@
 import Foundation
 import CoreLocation
 
-//class
+protocol LocationServiceType: class {
+    var currentLocation: CLLocation? { get }
+    func addObserver(_ observer: LocationServiceObserverType)
+}
 
-//class ViewController: UIViewController, CLLocationManagerDelegate {
-//    let locationManager = CLLocationManager()
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.requestWhenInUseAuthorization()
-//        if CLLocationManager.locationServicesEnabled() {
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            locationManager.startUpdatingLocation()
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
-//    }
-//}
+protocol LocationServiceObserverType: class {
+    func didUpdateCurrentLocations(_ location: CLLocation)
+}
+
+class LocationService: NSObject, LocationServiceType {
+    var currentLocation: CLLocation?
+    
+//    private let LocationLongitudeKey = "LocationLatitudeKey"
+//    private let LocationLatitudeKey = "LocationLatitudeKey"
+    
+    private let locationManager = CLLocationManager()
+    private var observers: [LocationServiceObserverType] = []
+    
+    func addObserver(_ observer: LocationServiceObserverType) {
+        observers.append(observer)
+        requesPermissions()
+    }
+    
+    private func requesPermissions() {
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    private func stopUpdating() {
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+extension LocationService: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        guard let location = manager.location ?? locations.last else { return }
+        currentLocation = location
+        observers.forEach {
+            $0.didUpdateCurrentLocations(location)
+        }
+    }
+}

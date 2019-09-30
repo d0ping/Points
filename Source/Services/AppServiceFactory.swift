@@ -11,11 +11,13 @@ import Foundation
 protocol AppServiceFactoryType: class {
     func makeAPIService() -> APIServiceType
     func makeStorageService() -> StorageServiceType
+    func makeLocationService() -> LocationServiceType
 }
 
 class AppServiceFactory: AppServiceFactoryType {
     private lazy var apiService = APIService(config: APIServiceConfiguration())
     private lazy var storageService = StorageService(dataBase: makeDataBase())
+    private lazy var locationService = LocationService()
     
     func makeAPIService() -> APIServiceType {
         return apiService
@@ -27,5 +29,9 @@ class AppServiceFactory: AppServiceFactoryType {
     
     private func makeDataBase() -> PersistDataBaseType {
         return PersistDataBase()
+    }
+    
+    func makeLocationService() -> LocationServiceType {
+        return locationService
     }
 }

@@ -22,7 +22,8 @@ class AppScreenFactory: AppScreenFactoryType {
     // MARK: - Map controller
     func makeMapPresenter() -> MapPresenterType {
         return MapPresenter(interactor: makeMapInteractor(),
-                            builder: makeMapAnnotationBuilder())
+                            builder: makeMapAnnotationBuilder(),
+                            locationService: serviceFactory.makeLocationService())
     }
     
     private func makeMapInteractor() -> MapInteractorType {

@@ -20,25 +20,35 @@ protocol MapPresenterType: class {
 final class MapPresenter: NSObject, MapPresenterType {
     private let interactor: MapInteractorType
     private let builder: MapAnnotationBuilderType
+    private let locationService: LocationServiceType
     
     private weak var mapView: MKMapView?
+    private var firstPositioning: Bool = false
     
-    init(interactor: MapInteractorType, builder: MapAnnotationBuilderType) {
+    init(interactor: MapInteractorType, builder: MapAnnotationBuilderType, locationService: LocationServiceType) {
         self.interactor = interactor
         self.builder = builder
+        self.locationService = locationService
     }
     
     func setup(_ mapView: MKMapView) {
         self.mapView = mapView
         mapView.delegate = self
-        mapView.showsUserLocation = true
         
+        self.locationService.addObserver(self)
+        
+        self.registerMapAnnotationViews()
         let points = interactor.obtainCachedPoints()
         addAnnotations(at: points)
         
         interactor.prepareDataIfNeeded { [weak self] in
             self?.loadPointsForCurrentMapRegion()
         }
+    }
+    
+    private func registerMapAnnotationViews() {
+        guard let mapView = mapView else { return }
+        mapView.register(PointAnnotationView.self, forAnnotationViewWithReuseIdentifier: PointAnnotation.reuseIdentifier)
     }
     
     func zoomIn() {
@@ -75,6 +85,14 @@ final class MapPresenter: NSObject, MapPresenterType {
         let distantLocation = CLLocation(latitude: region.center.latitude + region.span.latitudeDelta / 2,
                                          longitude: region.center.longitude + region.span.longitudeDelta / 2)
         return centerLocation.distance(from: distantLocation)
+    }
+}
+
+extension MapPresenter: LocationServiceObserverType {
+    func didUpdateCurrentLocations(_ location: CLLocation) {
+        if firstPositioning { return }
+        mapView?.setCenterCoordinate(location.coordinate, withZoomLevel: 10, animated: true)
+        firstPositioning = true
     }
 }
 
