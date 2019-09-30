@@ -25,6 +25,10 @@
 		A48703C023394D39009A196A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48703BF23394D38009A196A /* MapViewController.swift */; };
 		A48703C2233951B9009A196A /* AppServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48703C1233951B9009A196A /* AppServiceFactory.swift */; };
 		A48703C4233952D9009A196A /* APIServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48703C3233952D9009A196A /* APIServiceConfiguration.swift */; };
+		A48C3FEF2342C6F800CA8DC1 /* PointDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FEB2342C6F800CA8DC1 /* PointDetailView.swift */; };
+		A48C3FF02342C6F800CA8DC1 /* PointAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FEC2342C6F800CA8DC1 /* PointAnnotationView.swift */; };
+		A48C3FF12342C6F800CA8DC1 /* PointDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C3FED2342C6F800CA8DC1 /* PointDetailView.xib */; };
+		A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */; };
 		A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B0233C00F400F4CE69 /* PointModel.swift */; };
 		A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B2233C020700F4CE69 /* ListModel.swift */; };
 		A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A426990D234000BA0089632C /* DataModel.xcdatamodeld */; };
@@ -57,6 +61,10 @@
 		A48703BF23394D38009A196A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A48703C1233951B9009A196A /* AppServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServiceFactory.swift; sourceTree = "<group>"; };
 		A48703C3233952D9009A196A /* APIServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceConfiguration.swift; sourceTree = "<group>"; };
+		A48C3FEB2342C6F800CA8DC1 /* PointDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointDetailView.swift; sourceTree = "<group>"; };
+		A48C3FEC2342C6F800CA8DC1 /* PointAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointAnnotationView.swift; sourceTree = "<group>"; };
+		A48C3FED2342C6F800CA8DC1 /* PointDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PointDetailView.xib; sourceTree = "<group>"; };
+		A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointAnnotation.swift; sourceTree = "<group>"; };
 		A4BCB1B0233C00F400F4CE69 /* PointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointModel.swift; sourceTree = "<group>"; };
 		A4BCB1B2233C020700F4CE69 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		A4EEF8DC234049310003EAB9 /* MapAnnotationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationBuilder.swift; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 		A48703B82337FAA8009A196A /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				A48C3FEA2342C6F800CA8DC1 /* Annotations */,
 				A48703BF23394D38009A196A /* MapViewController.swift */,
 				A459BD5F23395B1000D642A1 /* MapPresenter.swift */,
 				A4269906233FEBF10089632C /* MapInteractor.swift */,
@@ -211,6 +220,17 @@
 				A48703BD2337FB17009A196A /* StorageSevice.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		A48C3FEA2342C6F800CA8DC1 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */,
+				A48C3FEC2342C6F800CA8DC1 /* PointAnnotationView.swift */,
+				A48C3FEB2342C6F800CA8DC1 /* PointDetailView.swift */,
+				A48C3FED2342C6F800CA8DC1 /* PointDetailView.xib */,
+			);
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 		A4BCB1AF233C00D400F4CE69 /* Models */ = {
@@ -282,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A48703AD2337F742009A196A /* LaunchScreen.storyboard in Resources */,
+				A48C3FF12342C6F800CA8DC1 /* PointDetailView.xib in Resources */,
 				A48703AA2337F742009A196A /* Assets.xcassets in Resources */,
 				A48703A52337F73F009A196A /* Main.storyboard in Resources */,
 			);
@@ -302,10 +323,13 @@
 				A4EEF8E92340FB650003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */,
 				A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */,
 				A4269907233FEBF10089632C /* MapInteractor.swift in Sources */,
+				A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */,
 				A4EEF8E82340FB650003EAB9 /* PointEntity+CoreDataClass.swift in Sources */,
 				A48703BC2337FAC6009A196A /* APIService.swift in Sources */,
+				A48C3FEF2342C6F800CA8DC1 /* PointDetailView.swift in Sources */,
 				A459BD6023395B1000D642A1 /* MapPresenter.swift in Sources */,
 				A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */,
+				A48C3FF02342C6F800CA8DC1 /* PointAnnotationView.swift in Sources */,
 				A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */,
 				A48703BE2337FB17009A196A /* StorageSevice.swift in Sources */,
 				A426990B233FFC9D0089632C /* PersistDataBase.swift in Sources */,

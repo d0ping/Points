@@ -10,18 +10,22 @@ import Foundation
 import MapKit
 
 protocol MapAnnotationBuilderType: class {
-    func buildAnnotation(at points: [PointModel], partners: [PartnerModel]) -> [MKPointAnnotation]
+    func buildAnnotations(at points: [PointModel], partners: [PartnerModel]) -> [PointAnnotation]
 }
 
 class MapAnnotationBuilder: MapAnnotationBuilderType {
-    func buildAnnotation(at points: [PointModel], partners: [PartnerModel]) -> [MKPointAnnotation] {
+    func buildAnnotations(at points: [PointModel], partners: [PartnerModel]) -> [PointAnnotation] {
         return points.map { point in
             let partner = partners.first(where: { point.partnerName == $0.id })
-            let annotation = MKPointAnnotation()
-            annotation.title = partner?.name ?? point.partnerName
-            annotation.subtitle = point.fullAddress
-            annotation.coordinate = point.location
-            return annotation
+            
+            return PointAnnotation(coordinate: point.location,
+                                   title: partner?.name ?? point.partnerName,
+                                   subtitle: point.fullAddress,
+                                   image: nil,
+                                   fullAddress: point.fullAddress,
+                                   workHours: point.workHours,
+                                   url: partner?.url,
+                                   tel: nil)
         }
     }
 }
