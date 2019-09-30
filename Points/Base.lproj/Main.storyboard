@@ -18,34 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="XjU-ev-oRH">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XjU-ev-oRH">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UQt-Ba-NZ9">
-                                <rect key="frame" x="354" y="392" width="52" height="112"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="UQt-Ba-NZ9">
+                                <rect key="frame" x="352" y="388" width="54" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpw-Q9-hJU">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpw-Q9-hJU">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="HaH-Mo-SdU"/>
-                                            <constraint firstAttribute="width" constant="52" id="WOV-fl-bZC"/>
+                                            <constraint firstAttribute="height" constant="54" id="HaH-Mo-SdU"/>
+                                            <constraint firstAttribute="width" constant="54" id="WOV-fl-bZC"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                        <state key="normal" title="+">
+                                        <state key="normal" image="map-button-plus">
                                             <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="zoomInButtonDidSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZeR-wL-87G"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-JD-HGB">
-                                        <rect key="frame" x="0.0" y="60" width="52" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-JD-HGB">
+                                        <rect key="frame" x="0.0" y="66" width="54" height="54"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="AGB-Re-wmo"/>
-                                            <constraint firstAttribute="width" constant="52" id="RTq-9d-v0S"/>
+                                            <constraint firstAttribute="height" constant="54" id="AGB-Re-wmo"/>
+                                            <constraint firstAttribute="width" constant="54" id="RTq-9d-v0S"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                        <state key="normal" title="-">
+                                        <state key="normal" image="map-button-minus">
                                             <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -54,14 +52,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCA-dz-7FL">
-                                <rect key="frame" x="354" y="76" width="52" height="52"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCA-dz-7FL">
+                                <rect key="frame" x="352" y="242" width="54" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="52" id="WMv-O4-hAs"/>
-                                    <constraint firstAttribute="height" constant="52" id="zbN-WP-2Io"/>
+                                    <constraint firstAttribute="width" constant="54" id="WMv-O4-hAs"/>
+                                    <constraint firstAttribute="height" constant="54" id="zbN-WP-2Io"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="L">
+                                <state key="normal" image="map-button-location">
                                     <color key="titleColor" red="0.48627450979999998" green="0.098039215690000001" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -71,12 +68,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eCA-dz-7FL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="ASg-KJ-hBu"/>
                             <constraint firstItem="XjU-ev-oRH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BiM-wP-ivC"/>
                             <constraint firstAttribute="trailing" secondItem="XjU-ev-oRH" secondAttribute="trailing" id="MDm-e2-air"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eCA-dz-7FL" secondAttribute="trailing" constant="8" id="OsN-0i-hRv"/>
                             <constraint firstItem="XjU-ev-oRH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="baZ-qk-ZAl"/>
                             <constraint firstAttribute="bottom" secondItem="XjU-ev-oRH" secondAttribute="bottom" id="e23-98-NRR"/>
+                            <constraint firstItem="eCA-dz-7FL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6" id="h4l-Gd-GXA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UQt-Ba-NZ9" secondAttribute="trailing" constant="8" id="jPf-FU-bz1"/>
                             <constraint firstItem="UQt-Ba-NZ9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zqE-XJ-Vlg"/>
                         </constraints>
@@ -93,4 +90,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="map-button-location" width="54" height="54"/>
+        <image name="map-button-minus" width="54" height="54"/>
+        <image name="map-button-plus" width="54" height="54"/>
+    </resources>
 </document>
