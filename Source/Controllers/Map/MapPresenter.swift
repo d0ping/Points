@@ -20,14 +20,16 @@ protocol MapPresenterType: class {
 final class MapPresenter: NSObject, MapPresenterType {
     private let interactor: MapInteractorType
     private let builder: MapAnnotationBuilderType
+    private let router: MapRouterType
     private let locationService: LocationServiceType
     
     private weak var mapView: MKMapView?
     private var firstPositioning: Bool = false
     
-    init(interactor: MapInteractorType, builder: MapAnnotationBuilderType, locationService: LocationServiceType) {
+    init(interactor: MapInteractorType, builder: MapAnnotationBuilderType, router: MapRouterType, locationService: LocationServiceType) {
         self.interactor = interactor
         self.builder = builder
+        self.router = router
         self.locationService = locationService
     }
     

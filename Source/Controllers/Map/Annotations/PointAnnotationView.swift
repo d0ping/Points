@@ -8,8 +8,13 @@
 
 import MapKit
 
+typealias Closur<T> = (T) -> Void
 class PointAnnotationView: MKAnnotationView {
-    weak var calloutView: PointDetailView?
+    
+    var callPhoneClosure: Closur<String>?
+    var openUrlClosure: Closur<URL>?
+    
+    private weak var calloutView: PointDetailView?
     override var annotation: MKAnnotation? {
         willSet { calloutView?.removeFromSuperview() }
     }
@@ -25,6 +30,7 @@ class PointAnnotationView: MKAnnotationView {
     }
     
     func setup() {
+        isEnabled = true
         canShowCallout = false
         image = UIImage(named: "map_pin")
     }
@@ -38,7 +44,14 @@ class PointAnnotationView: MKAnnotationView {
         let resultView = PointDetailView.loadFromNib()
         if let model = annotation as? PointAnnotation {
             resultView.setup(model)
-        }
+            resultView.callPhoneAction = { [weak self] in
+                guard let closure = self?.callPhoneClosure else { return }
+                closure("")
+            }
+            resultView.openUrlAction = { [weak self] in
+                guard let closure = self?.openUrlClosure, let url = model.url else { return }
+                closure(url)
+            }        }
         return resultView
     }
     
@@ -73,14 +86,18 @@ class PointAnnotationView: MKAnnotationView {
                 calloutView.removeFromSuperview()
             }
         }
-        
+    }
+}
+
+extension PointAnnotationView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let hitView = super.hitTest(point, with: event) else { return nil }
+        superview?.bringSubviewToFront(self)
+        return hitView
     }
     
-//    @objc func callPhoneNumber(sender: UIButton) {
-//        let v = sender.superview as! CustomCalloutView
-//        if let url = URL(string: "telprompt://\(v.starbucksPhone.text!)"), UIApplication.shared.canOpenURL(url)
-//        {
-//            UIApplication.shared.openURL(url)
-//        }
-//    }
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if bounds.contains(point) { return true }
+        return subviews.contains(where: { $0.frame.contains(point) })
+    }
 }

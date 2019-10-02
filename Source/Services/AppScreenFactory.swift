@@ -23,6 +23,7 @@ class AppScreenFactory: AppScreenFactoryType {
     func makeMapPresenter() -> MapPresenterType {
         return MapPresenter(interactor: makeMapInteractor(),
                             builder: makeMapAnnotationBuilder(),
+                            router: makeMapRouter(),
                             locationService: serviceFactory.makeLocationService())
     }
     
@@ -33,5 +34,9 @@ class AppScreenFactory: AppScreenFactoryType {
     
     private func makeMapAnnotationBuilder() -> MapAnnotationBuilderType {
         return MapAnnotationBuilder()
+    }
+    
+    private func makeMapRouter() -> MapRouterType {
+        return MapRouter()
     }
 }

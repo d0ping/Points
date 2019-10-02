@@ -18,6 +18,9 @@ class PointDetailView: UIView {
     
     @IBOutlet weak var urlButton: UIButton!
     @IBOutlet weak var telButton: UIButton!
+    
+    var callPhoneAction: (() -> Void)?
+    var openUrlAction: (() -> Void)?
 
     class func loadFromNib() -> PointDetailView {
         let nib  = UINib.init(nibName: "PointDetailView", bundle: nil)
@@ -34,5 +37,18 @@ class PointDetailView: UIView {
         
         urlButton.isHidden = annotation.url == nil
         telButton.isHidden = annotation.tel == nil
+        
+        layer.cornerRadius = 6.0
+        layer.borderWidth = 2.0
+        layer.borderColor = UIColor.lightGray.cgColor
+        clipsToBounds = true
+    }
+    
+    @IBAction func openURLDidSelect(_ sender: UIButton) {
+        if let action = openUrlAction { action() }
+    }
+    
+    @IBAction func callphoneDidSelect(_ senter: UIButton) {
+        if let action = callPhoneAction { action() }
     }
 }
