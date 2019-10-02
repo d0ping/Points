@@ -14,11 +14,12 @@
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="partnerName" attributeType="String" syncable="YES"/>
+        <attribute name="phones" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workHours" attributeType="String" syncable="YES"/>
         <relationship name="partner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PartnerEntity" inverseName="points" inverseEntity="PartnerEntity" syncable="YES"/>
     </entity>
     <elements>
         <element name="PartnerEntity" positionX="1301.96875" positionY="43.4453125" width="128" height="135"/>
-        <element name="PointEntity" positionX="1093.3359375" positionY="43.7421875" width="128" height="150"/>
+        <element name="PointEntity" positionX="1093.3359375" positionY="43.7421875" width="128" height="165"/>
     </elements>
 </model>

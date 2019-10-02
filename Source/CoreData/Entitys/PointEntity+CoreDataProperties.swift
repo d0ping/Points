@@ -23,6 +23,7 @@ extension PointEntity {
     @NSManaged public var longitude: Double
     @NSManaged public var partnerName: String?
     @NSManaged public var workHours: String?
+    @NSManaged public var phones: String?
     @NSManaged public var partner: PartnerEntity?
 
 }

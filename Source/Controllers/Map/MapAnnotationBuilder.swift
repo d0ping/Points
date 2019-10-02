@@ -25,7 +25,7 @@ class MapAnnotationBuilder: MapAnnotationBuilderType {
                                    fullAddress: point.fullAddress,
                                    workHours: point.workHours,
                                    url: partner?.url,
-                                   tel: nil)
+                                   tel: point.phones)
         }
     }
 }

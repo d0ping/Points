@@ -45,13 +45,14 @@ class PointAnnotationView: MKAnnotationView {
         if let model = annotation as? PointAnnotation {
             resultView.setup(model)
             resultView.callPhoneAction = { [weak self] in
-                guard let closure = self?.callPhoneClosure else { return }
-                closure("")
+                guard let closure = self?.callPhoneClosure, let tel = model.tel else { return }
+                closure(tel.digits)
             }
             resultView.openUrlAction = { [weak self] in
                 guard let closure = self?.openUrlClosure, let url = model.url else { return }
                 closure(url)
-            }        }
+            }
+        }
         return resultView
     }
     

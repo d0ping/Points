@@ -15,6 +15,7 @@ struct PointModel: JSONObjectDecodable {
     let partnerName: String
     let workHours: String
     let fullAddress: String
+    let phones: String
     let location: CLLocationCoordinate2D
     let partner: PartnerModel?
     
@@ -23,6 +24,7 @@ struct PointModel: JSONObjectDecodable {
         guard let partnerName = jsonObject["partnerName"] as? String else { return nil }
         guard let workHours = jsonObject["workHours"] as? String else { return nil }
         guard let fullAddress = jsonObject["fullAddress"] as? String else { return nil }
+        guard let phones = jsonObject["phones"] as? String else { return nil }
         guard let location = jsonObject["location"] as? JSONObject,
             let latitude = location["latitude"] as? Double,
             let longitude = location["longitude"] as? Double else { return nil }
@@ -31,6 +33,7 @@ struct PointModel: JSONObjectDecodable {
         self.partnerName = partnerName
         self.workHours = workHours
         self.fullAddress = fullAddress
+        self.phones = phones
         self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.partner = nil
     }
@@ -48,6 +51,7 @@ extension PointModel: ManagedObjectConvertable {
         self.partnerName = entity.partnerName ?? ""
         self.workHours = entity.workHours ?? ""
         self.fullAddress = entity.fullAddress ?? ""
+        self.phones = entity.phones ?? ""
         self.location = CLLocationCoordinate2D(latitude: entity.latitude, longitude: entity.longitude)
         self.partner = try entity.partner.map({ try PartnerModel(managedObject: $0) })
     }
@@ -59,6 +63,7 @@ extension PointModel: ManagedObjectConvertable {
         entity.partnerName = self.partnerName
         entity.workHours = self.workHours
         entity.fullAddress = self.fullAddress
+        entity.phones = self.phones
         entity.latitude = self.location.latitude
         entity.longitude = self.location.longitude
     }

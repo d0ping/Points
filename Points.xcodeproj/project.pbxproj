@@ -30,6 +30,7 @@
 		A48C3FF12342C6F800CA8DC1 /* PointDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C3FED2342C6F800CA8DC1 /* PointDetailView.xib */; };
 		A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */; };
 		A48C3FF4234313D500CA8DC1 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FF3234313D500CA8DC1 /* MapRouter.swift */; };
+		A48CAF462344F60700C3B754 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF452344F60700C3B754 /* StringExtension.swift */; };
 		A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B0233C00F400F4CE69 /* PointModel.swift */; };
 		A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B2233C020700F4CE69 /* ListModel.swift */; };
 		A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A426990D234000BA0089632C /* DataModel.xcdatamodeld */; };
@@ -67,6 +68,7 @@
 		A48C3FED2342C6F800CA8DC1 /* PointDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PointDetailView.xib; sourceTree = "<group>"; };
 		A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointAnnotation.swift; sourceTree = "<group>"; };
 		A48C3FF3234313D500CA8DC1 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		A48CAF452344F60700C3B754 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		A4BCB1B0233C00F400F4CE69 /* PointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointModel.swift; sourceTree = "<group>"; };
 		A4BCB1B2233C020700F4CE69 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		A4EEF8DC234049310003EAB9 /* MapAnnotationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationBuilder.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				A471880F233A7B2F004FF2E0 /* ViewControllerExtension.swift */,
+				A48CAF452344F60700C3B754 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				A4EEF8E92340FB650003EAB9 /* PointEntity+CoreDataProperties.swift in Sources */,
 				A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */,
 				A4269907233FEBF10089632C /* MapInteractor.swift in Sources */,
+				A48CAF462344F60700C3B754 /* StringExtension.swift in Sources */,
 				A48C3FF4234313D500CA8DC1 /* MapRouter.swift in Sources */,
 				A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */,
 				A4EEF8E82340FB650003EAB9 /* PointEntity+CoreDataClass.swift in Sources */,
