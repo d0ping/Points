@@ -24,12 +24,12 @@ class AppScreenFactory: AppScreenFactoryType {
         return MapPresenter(interactor: makeMapInteractor(),
                             builder: makeMapAnnotationBuilder(),
                             router: makeMapRouter(),
-                            locationService: serviceFactory.makeLocationService())
+                            locationService: serviceFactory.locationService)
     }
     
     private func makeMapInteractor() -> MapInteractorType {
-        return MapInteractor(apiService: serviceFactory.makeAPIService(),
-                             storageService: serviceFactory.makeStorageService())
+        return MapInteractor(apiService: serviceFactory.apiService,
+                             storageService: serviceFactory.storageService)
     }
     
     private func makeMapAnnotationBuilder() -> MapAnnotationBuilderType {

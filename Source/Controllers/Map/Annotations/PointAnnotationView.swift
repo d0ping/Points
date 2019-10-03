@@ -9,8 +9,8 @@
 import MapKit
 
 typealias Closur<T> = (T) -> Void
-class PointAnnotationView: MKAnnotationView {
-    
+
+final class PointAnnotationView: MKAnnotationView {
     var callPhoneClosure: Closur<String>?
     var openUrlClosure: Closur<URL>?
     
@@ -21,12 +21,12 @@ class PointAnnotationView: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.setup()
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     func setup() {
@@ -37,7 +37,7 @@ class PointAnnotationView: MKAnnotationView {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.calloutView?.removeFromSuperview()
+        calloutView?.removeFromSuperview()
     }
     
     private func makeCalloutView() -> PointDetailView {
@@ -60,7 +60,7 @@ class PointAnnotationView: MKAnnotationView {
         super.setSelected(selected, animated: animated)
         
         if selected {
-            self.calloutView?.removeFromSuperview()            
+            calloutView?.removeFromSuperview()
             let pointCalloutView = makeCalloutView()
             
             pointCalloutView.frame.origin.x -= pointCalloutView.frame.width / 2 - frame.width / 2

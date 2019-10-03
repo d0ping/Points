@@ -6,7 +6,7 @@
 //  Copyright © 2019 Denis Bogatyrev. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 protocol StorageServiceType: class {
@@ -16,6 +16,8 @@ protocol StorageServiceType: class {
     func allPartners() -> [PartnerModel]
     func allPoints() -> [PointModel]
     func partners(at identifiers: [String]) -> [PartnerModel]
+    func saveImage(_ image: UIImage, with identifiier: String)
+    func fetchImage(at identifier: String) -> ImageModel?
 }
 
 final class StorageService: StorageServiceType {
@@ -58,6 +60,16 @@ final class StorageService: StorageServiceType {
                                    of: PartnerModel.self).map { $0.object }
     }
     
+    func saveImage(_ image: UIImage, with identifiier: String) {
+        let model = ImageModel(identifier: identifiier, image: image, lastModified: Date())
+        save(model, completion: nil)
+    }
+    
+    func fetchImage(at identifier: String) -> ImageModel? {
+        return dataBase.getObjects(with: EntitySearchable(entityName: ImageModel.entityName,
+                                                          predicate: NSPredicate(format: "identifier == %@", identifier)),
+                                   of: ImageModel.self).map { $0.object }.first
+    }
 }
 
 extension StorageService {
@@ -72,6 +84,13 @@ extension StorageService {
         dataBase.update(object: EntityRepresentable(entityName: PartnerModel.entityName, object: partner),
                         with: EntitySearchable(entityName: PartnerModel.entityName,
                                                predicate: NSPredicate(format: "id == %@", partner.id)),
+                        completion: completion)
+    }
+    
+    private func save(_ image: ImageModel, completion: PersistDataBaseCompletion?) {
+        dataBase.update(object: EntityRepresentable(entityName: ImageModel.entityName, object: image),
+                        with: EntitySearchable(entityName: ImageModel.entityName,
+                                               predicate: NSPredicate(format: "identifier == %@", image.identifier)),
                         completion: completion)
     }
 }

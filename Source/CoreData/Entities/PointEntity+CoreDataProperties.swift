@@ -2,7 +2,7 @@
 //  PointEntity+CoreDataProperties.swift
 //  Points
 //
-//  Created by Denis Bogatyrev on 29/09/2019.
+//  Created by Denis Bogatyrev on 03/10/2019.
 //  Copyright © 2019 Denis Bogatyrev. All rights reserved.
 //
 //
@@ -22,8 +22,8 @@ extension PointEntity {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var partnerName: String?
-    @NSManaged public var workHours: String?
     @NSManaged public var phones: String?
+    @NSManaged public var workHours: String?
     @NSManaged public var partner: PartnerEntity?
 
 }

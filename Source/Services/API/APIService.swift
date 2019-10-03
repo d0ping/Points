@@ -13,37 +13,21 @@ enum APIRequestResult {
     case failure(APIError)
 }
 
-typealias JSON = Any
-typealias JSONObject = [String: Any]
-typealias JSONArray = [Any]
-
-protocol JSONObjectDecodable {
-    init?(jsonObject: JSONObject)
-}
-
-protocol APIResult: JSONObjectDecodable {}
-
-enum APIError {
-    case clientError(Error?)
-    case decodeError
+enum APIError: Equatable {
     case invalidURLError
+    case httpError(Error?)
+    case decodeError
+    case lastModifiedError
+    case filereadError
     case unknownError
 }
-
-
 
 protocol APIServiceType: class {
     func request(_ endpoint: APIEndpoint, handler: @escaping (APIRequestResult) -> Void)
 }
 
 final class APIService: APIServiceType {
-    private let config: APIServiceConfigurationType
-    
     private var urlSession = URLSession(configuration: .default)
-    
-    init(config: APIServiceConfigurationType) {
-        self.config = config
-    }
     
     func decodeJSON(data: Data) throws -> JSON {
         return try JSONSerialization.jsonObject(with: data, options: [])
@@ -55,18 +39,14 @@ final class APIService: APIServiceType {
         }
         
         let task = urlSession.dataTask(with: url) { [weak self] data, _, error in
-            
             guard let data = data, let json = try? self?.decodeJSON(data: data), let jsonObject = json as? JSONObject else {
                 let error = APIError.decodeError
                 return handler(.failure(error))
             }
-            
             DispatchQueue.main.async {
                 handler(.success(jsonObject))
             }
         }
-        
         task.resume()
     }
-    
 }

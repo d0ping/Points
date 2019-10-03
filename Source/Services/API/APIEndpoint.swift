@@ -9,6 +9,7 @@
 import Foundation
 
 struct APIEndpoint {
+    private let config = APIConfiguration()
     let path: String
     let queryItems: [URLQueryItem]
 }
@@ -16,11 +17,10 @@ struct APIEndpoint {
 extension APIEndpoint {
     var url: URL? {
         var components = URLComponents()
-        components.scheme = "https"
-        components.host = "api.tinkoff.ru"
+        components.scheme = config.scheme
+        components.host = config.baseHost
         components.path = path
         components.queryItems = queryItems
-        
         return components.url
     }
 }

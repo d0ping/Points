@@ -2,7 +2,7 @@
 //  PartnerEntity+CoreDataProperties.swift
 //  Points
 //
-//  Created by Denis Bogatyrev on 29/09/2019.
+//  Created by Denis Bogatyrev on 03/10/2019.
 //  Copyright © 2019 Denis Bogatyrev. All rights reserved.
 //
 //
@@ -22,6 +22,7 @@ extension PartnerEntity {
     @NSManaged public var name: String?
     @NSManaged public var pointType: String?
     @NSManaged public var url: URL?
+    @NSManaged public var image: ImageEntity?
     @NSManaged public var points: NSSet?
 
 }
