@@ -16,7 +16,7 @@ protocol StorageServiceType: class {
     func allPartners() -> [PartnerModel]
     func allPoints() -> [PointModel]
     func partners(at identifiers: [String]) -> [PartnerModel]
-    func saveImage(_ image: UIImage, with identifiier: String)
+    func saveImage(_ image: UIImage, with identifiier: String, partnerId: String)
     func fetchImage(at identifier: String) -> ImageModel?
 }
 
@@ -60,9 +60,14 @@ final class StorageService: StorageServiceType {
                                    of: PartnerModel.self).map { $0.object }
     }
     
-    func saveImage(_ image: UIImage, with identifiier: String) {
+    func saveImage(_ image: UIImage, with identifiier: String, partnerId: String) {
         let model = ImageModel(identifier: identifiier, image: image, lastModified: Date())
-        save(model, completion: nil)
+        save(model) { [weak self] result in
+            switch result {
+            case .success: self?.associateIfNeeded(model, with: partnerId, completion: nil)
+            case .failure: break
+            }
+        }
     }
     
     func fetchImage(at identifier: String) -> ImageModel? {
@@ -92,5 +97,15 @@ extension StorageService {
                         with: EntitySearchable(entityName: ImageModel.entityName,
                                                predicate: NSPredicate(format: "identifier == %@", image.identifier)),
                         completion: completion)
+    }
+    
+    private func associateIfNeeded(_ image: ImageModel, with partnerId: String, completion: PersistDataBaseCompletion?) {
+        guard let partner = partners(at: [partnerId]).first else { return }
+        dataBase.updateFields(keyPath: \PartnerModel.image,
+                              of: PartnerModel.self,
+                              newValue: image,
+                              condition: EntitySearchable(entityName: PartnerModel.entityName,
+                                                          predicate: NSPredicate(format: "id == %@", partnerId)),
+                              completion: completion)
     }
 }

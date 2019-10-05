@@ -54,7 +54,7 @@ final class MapInteractor: MapInteractorType {
             let downloadGroup = DispatchGroup()
             self.partners.forEach { partner in
                 downloadGroup.enter()
-                self.imageProvider.obtainImage(with: partner.picture, completion: { [weak self] image in
+                self.imageProvider.obtainImage(with: partner.picture, partnerId: partner.id, completion: { [weak self] image in
                     self?.partnersImages[partner.id] = image
                     downloadGroup.leave()
                 })

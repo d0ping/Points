@@ -67,4 +67,8 @@ extension PointModel: ManagedObjectConvertable {
         entity.latitude = self.location.latitude
         entity.longitude = self.location.longitude
     }
+    
+    static func updateField<Model, Value>(with keyPath: KeyPath<Model, Value>, value: Value?, managedObject: NSManagedObject, in context: NSManagedObjectContext) throws {
+        
+    }
 }

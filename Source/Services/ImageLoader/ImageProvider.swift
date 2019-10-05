@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImageProviderType: class {
-    func obtainImage(with name: String, completion: @escaping (UIImage?) -> Void)
+    func obtainImage(with name: String, partnerId: String, completion: @escaping (UIImage?) -> Void)
 }
 
 final class ImageProvider: ImageProviderType {
@@ -23,7 +23,7 @@ final class ImageProvider: ImageProviderType {
         self.urlBuilder = urlBuilder
     }
     
-    func obtainImage(with name: String, completion: @escaping (UIImage?) -> Void) {
+    func obtainImage(with name: String, partnerId: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = urlBuilder.imageURL(with: name) else {
             completion(nil)
             return
@@ -33,7 +33,7 @@ final class ImageProvider: ImageProviderType {
         loader.loadImage(at: url, lastModified: model?.lastModified) { [weak self] result in
             switch result {
             case .success(let image):
-                self?.storage.saveImage(image, with: url.absoluteString.md5)
+                self?.storage.saveImage(image, with: url.absoluteString.md5, partnerId: partnerId)
                 completion(image)
             case .failure(let error):
                 if case .lastModifiedError = error { print("Image: /(name) not modified") }

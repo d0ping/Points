@@ -17,13 +17,12 @@ class MapAnnotationBuilder: MapAnnotationBuilderType {
     func buildAnnotations(at points: [PointModel], partners: [PartnerModel], partnerImages: [String: UIImage]) -> [PointAnnotation] {
         return points.map { point in
             let partner = partners.first(where: { point.partnerName == $0.id })
-            let partnerId = partner!.id
             
             return PointAnnotation(coordinate: point.location,
                                    partnerId: point.partnerName,
                                    title: partner?.name ?? point.partnerName,
                                    subtitle: point.fullAddress,
-                                   image: partnerImages[partnerId],
+                                   image: partner?.image?.image,
                                    fullAddress: point.fullAddress,
                                    workHours: point.workHours,
                                    url: partner?.url,

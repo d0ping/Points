@@ -33,12 +33,17 @@ public struct EntitySearchable {
 
 enum ManagedObjectConvertableError: Error {
     case invalidManagedObjectType
+    case invalidKeyPath
 }
 
 protocol ManagedObjectConvertable {
     static var entityName: String { get }
     init(managedObject: NSManagedObject) throws
     func fill(managedObject: NSManagedObject, in context: NSManagedObjectContext) throws
+    static func updateField<Model, Value>(with keyPath: KeyPath<Model, Value>,
+                                          value: Value?,
+                                          managedObject: NSManagedObject,
+                                          in context: NSManagedObjectContext) throws
 }
 
 public enum PersistDataBaseSaveResult {
@@ -53,6 +58,7 @@ protocol PersistDataBaseType: class {
     func getObjects<T>(with condition: EntitySearchable, of type: T.Type) -> [EntityRepresentable<T>]
     func insert<T>(object: EntityRepresentable<T>, completion: PersistDataBaseCompletion?)
     func update<T>(object: EntityRepresentable<T>, with condition: EntitySearchable, completion: PersistDataBaseCompletion?)
+    func updateFields<T, V>(keyPath: KeyPath<T, V>, of type: T.Type, newValue: V?, condition: EntitySearchable, completion: PersistDataBaseCompletion?)
 }
 
 final class PersistDataBase: PersistDataBaseType {
@@ -81,6 +87,20 @@ final class PersistDataBase: PersistDataBaseType {
         return handler(viewContext)
     }
     
+    private func performOnUpdateContextAndSave(block: @escaping (NSManagedObjectContext) throws -> Void,
+                                               saveCompletion: PersistDataBaseCompletion?) {
+        let context = updateContext
+        context.perform {
+            do {
+                try block(context)
+                context.save(completion: saveCompletion)
+            }
+            catch {
+                context.handleError(error, completion: saveCompletion)
+            }
+        }
+    }
+    
     func countOfObjects(with condition: EntitySearchable) -> Int {
         let fetchRequest = PersistDataBase.fetchRequest(from: condition)
         return read { context in
@@ -102,24 +122,16 @@ final class PersistDataBase: PersistDataBaseType {
     }
     
     func insert<T>(object: EntityRepresentable<T>, completion: PersistDataBaseCompletion?) {
-        let context = updateContext
         guard let convertableObject = object.object as? ManagedObjectConvertable else { return }
-        context.perform {
+        performOnUpdateContextAndSave(block: { context in
             let managedObject = NSEntityDescription.insertNewObject(forEntityName: object.entityName, into: context)
-            do {
-                try convertableObject.fill(managedObject: managedObject, in: context)
-            }
-            catch {
-                context.handleError(error, completion: completion)
-            }
-            context.save(completion: completion)
-        }
+            try convertableObject.fill(managedObject: managedObject, in: context)
+        }, saveCompletion: completion)
     }
     
     func update<T>(object: EntityRepresentable<T>, with condition: EntitySearchable, completion: PersistDataBaseCompletion?) {
-        let context = updateContext
         guard let convertableObject = object.object as? ManagedObjectConvertable else { return }
-        context.perform {
+        performOnUpdateContextAndSave(block: { context in
             let fetchRequest = PersistDataBase.fetchRequest(from: condition)
             let managedObject: NSManagedObject
             if let currentManagedObject = try? context.fetch(fetchRequest).first {
@@ -127,14 +139,21 @@ final class PersistDataBase: PersistDataBaseType {
             } else {
                 managedObject = NSEntityDescription.insertNewObject(forEntityName: object.entityName, into: context)
             }
-            do {
-                try convertableObject.fill(managedObject: managedObject, in: context)
-            }
-            catch {
-                context.handleError(error, completion: completion)
-            }
-            context.save(completion: completion)
-        }
+            try convertableObject.fill(managedObject: managedObject, in: context)
+        }, saveCompletion: completion)
+    }
+    
+    func updateFields<T, V>(keyPath: KeyPath<T, V>, of type: T.Type, newValue: V?, condition: EntitySearchable, completion: PersistDataBaseCompletion?) {
+        guard let convertableType = type as? ManagedObjectConvertable.Type else { return }
+        performOnUpdateContextAndSave(block: { (context) in
+            let fetchRequest = PersistDataBase.fetchRequest(from: condition)
+            let objects = try context.fetch(fetchRequest)
+            try objects.forEach({ object in
+                try convertableType.updateField(with: keyPath,
+                                                value: newValue,
+                                                managedObject: object,
+                                                in: context) })
+        }, saveCompletion: completion)
     }
     
     private static func fetchRequest(from condition: EntitySearchable) -> NSFetchRequest<NSManagedObject> {

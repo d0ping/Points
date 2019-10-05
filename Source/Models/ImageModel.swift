@@ -33,4 +33,10 @@ extension ImageModel: ManagedObjectConvertable {
         entity.data = self.image.pngData() as NSData?
         entity.lastModified = self.lastModified as NSDate
     }
+    
+    static func updateField<Model, Value>(with keyPath: KeyPath<Model, Value>,
+                                          value: Value?,
+                                          managedObject: NSManagedObject,
+                                          in context: NSManagedObjectContext) throws {
+    }
 }
