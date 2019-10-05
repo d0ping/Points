@@ -24,7 +24,7 @@ final class MapPresenter: NSObject, MapPresenterType {
     private let locationService: LocationServiceType
     
     private weak var mapView: MKMapView?
-    private var firstPositioning: Bool = false
+    private var isFirstPositioningDone: Bool = false
     
     init(interactor: MapInteractorType, builder: MapAnnotationBuilderType, router: MapRouterType, locationService: LocationServiceType) {
         self.interactor = interactor
@@ -44,7 +44,6 @@ final class MapPresenter: NSObject, MapPresenterType {
             guard let strongSelf = self else { return }
             let points = strongSelf.interactor.obtainCachedPoints()
             strongSelf.addAnnotations(at: points)
-            strongSelf.loadPointsForCurrentMapRegion()
         }
     }
     
@@ -99,9 +98,9 @@ final class MapPresenter: NSObject, MapPresenterType {
 
 extension MapPresenter: LocationServiceObserverType {
     func didUpdateCurrentLocations(_ location: CLLocation) {
-        if firstPositioning { return }
+        if isFirstPositioningDone { return }
         moveToCurrentLocation(animated: true)
-        firstPositioning = true
+        isFirstPositioningDone = true
     }
     
     private func moveToCurrentLocation(animated: Bool) {
@@ -114,11 +113,9 @@ extension MapPresenter: LocationServiceObserverType {
 
 extension MapPresenter: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-    }
-    
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        
+        print(mapView.region)
+        if isFirstPositioningDone == false { return }
+        loadPointsForCurrentMapRegion()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -138,7 +135,5 @@ extension MapPresenter: MKMapViewDelegate {
             return annotationView
         }
         return nil
-        
     }
 }
-
