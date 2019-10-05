@@ -17,7 +17,7 @@ final class PointAnnotationView: MKAnnotationView {
     private weak var calloutView: PointDetailView?
     override var annotation: MKAnnotation? {
         willSet { calloutView?.removeFromSuperview() }
-        didSet { image = UIImage.annotationImage(with: (self.annotation as? PointAnnotation)?.image ) }
+        didSet { if let ann = self.annotation as? PointAnnotation { update(ann) } }
     }
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
@@ -30,9 +30,14 @@ final class PointAnnotationView: MKAnnotationView {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         isEnabled = true
         canShowCallout = false
+    }
+    
+    private func update(_ annotation: PointAnnotation) {
+        image = UIImage.annotationImage(with: annotation.image )
+        clusteringIdentifier = annotation.partnerId
     }
     
     override func prepareForReuse() {

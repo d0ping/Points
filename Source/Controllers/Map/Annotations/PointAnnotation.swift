@@ -14,6 +14,7 @@ class PointAnnotation: NSObject, MKAnnotation {
     
     @objc dynamic var coordinate: CLLocationCoordinate2D
     
+    var partnerId: String?
     var title: String?
     var subtitle: String?
     
@@ -25,6 +26,7 @@ class PointAnnotation: NSObject, MKAnnotation {
     var tel: String?
     
     init(coordinate: CLLocationCoordinate2D,
+         partnerId: String?,
          title: String?,
          subtitle: String?,
          image: UIImage?,
@@ -33,6 +35,7 @@ class PointAnnotation: NSObject, MKAnnotation {
          url: URL?, tel: String?)
     {
         self.coordinate = coordinate
+        self.partnerId = partnerId
         self.title = title
         self.subtitle = subtitle
         self.image = image

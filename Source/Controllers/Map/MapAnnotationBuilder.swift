@@ -20,6 +20,7 @@ class MapAnnotationBuilder: MapAnnotationBuilderType {
             let partnerId = partner!.id
             
             return PointAnnotation(coordinate: point.location,
+                                   partnerId: point.partnerName,
                                    title: partner?.name ?? point.partnerName,
                                    subtitle: point.fullAddress,
                                    image: partnerImages[partnerId],
