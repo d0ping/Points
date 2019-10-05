@@ -12,6 +12,7 @@ protocol AppServiceFactoryType: class {
     var apiService: APIServiceType { get }
     var storageService: StorageServiceType { get }
     var locationService: LocationServiceType { get }
+    func makeImageProvider() -> ImageProviderType
 }
 
 class AppServiceFactory: AppServiceFactoryType {

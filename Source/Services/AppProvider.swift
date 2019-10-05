@@ -21,5 +21,8 @@ class AppProvider {
     private init(serviceFactory: AppServiceFactoryType, screenFactory: AppScreenFactoryType) {
         self.serviceFactory = serviceFactory
         self.screenFactory = screenFactory
+        
+        let cache = URLCache(memoryCapacity: 4*1024*1024, diskCapacity: 40*1024*1024, diskPath: nil)
+        URLCache.shared = cache
     }
 }

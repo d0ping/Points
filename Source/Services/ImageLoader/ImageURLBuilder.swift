@@ -23,7 +23,7 @@ struct ImageURLBuilder: ImageURLBuilderType {
         var components = URLComponents()
         components.scheme = configuration.scheme
         components.host = configuration.resourceHost
-        components.path = "icons/deposition-partners-v3/"
+        components.path = "/icons/deposition-partners-v3"
         return components.url
     }
 

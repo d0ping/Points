@@ -11,7 +11,7 @@ import Foundation
 extension DateFormatter {
     static func apiDateFormatter() -> DateFormatter {
         let dateFormatter = DateFormatter.init()
-        dateFormatter.dateFormat = "EEEE, dd LLL yyyy HH:mm:ss zzz"
+        dateFormatter.dateFormat = "EEE, dd LLL yyyy HH:mm:ss zzz"
         return dateFormatter
     }
 }

@@ -13,7 +13,7 @@ enum APIRequestResult {
     case failure(APIError)
 }
 
-enum APIError: Equatable {
+enum APIError {
     case invalidURLError
     case httpError(Error?)
     case decodeError

@@ -29,7 +29,8 @@ class AppScreenFactory: AppScreenFactoryType {
     
     private func makeMapInteractor() -> MapInteractorType {
         return MapInteractor(apiService: serviceFactory.apiService,
-                             storageService: serviceFactory.storageService)
+                             storageService: serviceFactory.storageService,
+                             imageProvider: serviceFactory.makeImageProvider())
     }
     
     private func makeMapAnnotationBuilder() -> MapAnnotationBuilderType {

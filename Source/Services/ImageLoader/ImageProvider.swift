@@ -36,8 +36,8 @@ final class ImageProvider: ImageProviderType {
                 self?.storage.saveImage(image, with: url.absoluteString.md5)
                 completion(image)
             case .failure(let error):
-                if error == .lastModifiedError { print("Image: /(name) not modified") }
-                completion (nil)
+                if case .lastModifiedError = error { print("Image: /(name) not modified") }
+                completion (model?.image)
             }
         }
     }
