@@ -54,16 +54,23 @@ final class MapPresenter: NSObject, MapPresenterType {
     }
     
     func zoomIn() {
-        loadPointsForCurrentMapRegion()
+        zoom(scale: 0.5)
     }
     
     func zoomOut() {
-        //
+        zoom(scale: 2)
+    }
+    
+    private func zoom(scale coef: Double) {
+        guard let center = mapView?.region.center, let span = mapView?.region.span else { return }
+        let newSpan = MKCoordinateSpan(latitudeDelta: span.latitudeDelta * coef, longitudeDelta: span.longitudeDelta * coef)
+        let region = MKCoordinateRegion(center: center, span: newSpan)
+        mapView?.setRegion(region, animated: true)
     }
     
     func moveToCurrentLocation() {
-        guard let mapView = mapView else { return }
-        mapView.setCenter(mapView.userLocation.coordinate, animated: true)
+        loadPointsForCurrentMapRegion()
+//        moveToCurrentLocation(animated: true)
     }
     
     private func loadPointsForCurrentMapRegion() {
@@ -78,7 +85,7 @@ final class MapPresenter: NSObject, MapPresenterType {
     
     private func addAnnotations(at points: [PointModel]) {
         guard let mapView = mapView else { return }
-        mapView.addAnnotations(builder.buildAnnotations(at: points, partners: interactor.partners))
+        mapView.addAnnotations(builder.buildAnnotations(at: points, partners: interactor.partners, partnerImages: interactor.partnersImages))
     }
     
     private func visibleRegionRadius(at region: MKCoordinateRegion) -> CLLocationDistance {
@@ -93,8 +100,15 @@ final class MapPresenter: NSObject, MapPresenterType {
 extension MapPresenter: LocationServiceObserverType {
     func didUpdateCurrentLocations(_ location: CLLocation) {
         if firstPositioning { return }
-        mapView?.setCenterCoordinate(location.coordinate, withZoomLevel: 10, animated: true)
+        moveToCurrentLocation(animated: true)
         firstPositioning = true
+    }
+    
+    private func moveToCurrentLocation(animated: Bool) {
+        guard let mapView = mapView, let center = locationService.currentLocation?.coordinate else { return }
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated: animated)
     }
 }
 
@@ -106,4 +120,25 @@ extension MapPresenter: MKMapViewDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation.isKind(of: MKUserLocation.self) == false else { return nil }
+        
+        if let annotation = annotation as? PointAnnotation {
+            let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PointAnnotation.reuseIdentifier,
+                                                                          for: annotation)
+            if let pointAnnotationView = annotationView as? PointAnnotationView {
+                pointAnnotationView.callPhoneClosure = { [weak self] tel in
+                    self?.router.callPhone(tel)
+                }
+                pointAnnotationView.openUrlClosure = { [weak self] url in
+                    self?.router.openWebSite(url)
+                }
+            }
+            return annotationView
+        }
+        return nil
+        
+    }
 }
+
