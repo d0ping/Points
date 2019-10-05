@@ -6,7 +6,7 @@
 //  Copyright © 2019 Denis Bogatyrev. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 typealias PointListModel = ListModel<PointModel>
@@ -14,6 +14,7 @@ typealias PartnerListModel = ListModel<PartnerModel>
 
 protocol MapInteractorType: class {
     var partners: [PartnerModel] { get }
+    var partnersImages: [String: UIImage] { get }
     func prepareDataIfNeeded(_ completion: @escaping () -> Void)
     func obtainCachedPoints() -> [PointModel]
     func loadPoints(for location: CLLocationCoordinate2D, radius: Int, completion: @escaping ([PointModel]) -> Void)
@@ -22,27 +23,46 @@ protocol MapInteractorType: class {
 final class MapInteractor: MapInteractorType {
     private let apiService: APIServiceType
     private let storageService: StorageServiceType
+    private let imageProvider: ImageProviderType
     
     private var visiblePointsIds: Set<String> = []
     
-    init(apiService: APIServiceType, storageService: StorageServiceType) {
+    init(apiService: APIServiceType, storageService: StorageServiceType, imageProvider: ImageProviderType) {
         self.apiService = apiService
         self.storageService = storageService
+        self.imageProvider = imageProvider
     }
     
-    var partners: [PartnerModel] {
-        return storageService.allPartners()
-    }
+    var partners: [PartnerModel] { return storageService.allPartners() }
+    var partnersImages: [String: UIImage] = [:]
     
     func prepareDataIfNeeded(_ completion: @escaping () -> Void) {
         guard storageService.partnersIsEmpty else {
-            completion()
+            preparePartnersImages(completion)
             return
         }
         
         loadPartners { [weak self] partners in
             self?.storageService.appendPartners(partners)
-            completion()
+            self?.preparePartnersImages(completion)
+        }
+    }
+    
+    // TODO: Needs optimizing image preparation
+    func preparePartnersImages(_ completion: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let downloadGroup = DispatchGroup()
+            self.partners.forEach { partner in
+                downloadGroup.enter()
+                self.imageProvider.obtainImage(with: partner.picture, completion: { [weak self] image in
+                    self?.partnersImages[partner.id] = image
+                    downloadGroup.leave()
+                })
+            }
+            downloadGroup.wait()
+            DispatchQueue.main.async {
+                completion()
+            }
         }
     }
     

@@ -17,6 +17,7 @@ final class PointAnnotationView: MKAnnotationView {
     private weak var calloutView: PointDetailView?
     override var annotation: MKAnnotation? {
         willSet { calloutView?.removeFromSuperview() }
+        didSet { image = UIImage.annotationImage(with: (self.annotation as? PointAnnotation)?.image ) }
     }
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
@@ -32,7 +33,6 @@ final class PointAnnotationView: MKAnnotationView {
     func setup() {
         isEnabled = true
         canShowCallout = false
-        image = UIImage(named: "map_pin")
     }
     
     override func prepareForReuse() {

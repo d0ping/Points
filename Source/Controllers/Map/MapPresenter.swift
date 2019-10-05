@@ -37,14 +37,14 @@ final class MapPresenter: NSObject, MapPresenterType {
         self.mapView = mapView
         mapView.delegate = self
         
-        self.locationService.addObserver(self)
+        locationService.addObserver(self)
         
-        self.registerMapAnnotationViews()
-        let points = interactor.obtainCachedPoints()
-        addAnnotations(at: points)
-        
+        registerMapAnnotationViews()
         interactor.prepareDataIfNeeded { [weak self] in
-            self?.loadPointsForCurrentMapRegion()
+            guard let strongSelf = self else { return }
+            let points = strongSelf.interactor.obtainCachedPoints()
+            strongSelf.addAnnotations(at: points)
+            strongSelf.loadPointsForCurrentMapRegion()
         }
     }
     
