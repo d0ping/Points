@@ -17,6 +17,7 @@ extension ImageEntity {
         return NSFetchRequest<ImageEntity>(entityName: "ImageEntity")
     }
 
+    @NSManaged public var annotation: NSData?
     @NSManaged public var data: NSData?
     @NSManaged public var identifier: String?
     @NSManaged public var lastModified: NSDate?

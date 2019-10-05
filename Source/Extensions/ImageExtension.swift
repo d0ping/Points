@@ -9,10 +9,9 @@
 import UIKit
 
 extension UIImage {
-    private static var defaultAnnotationImage: UIImage { return UIImage(named: "map_pin") ?? UIImage() }
+    static var defaultAnnotationImage: UIImage { return UIImage(named: "map_pin") ?? UIImage() }
     
-    static func annotationImage(with extraImage: UIImage? = nil) -> UIImage {
-        guard let image = extraImage else { return defaultAnnotationImage }
+    static func annotationImage(with image: UIImage) -> UIImage {
         let size = CGSize(width: 40, height: 40)
         return UIGraphicsImageRenderer(size: size).image { ctx in
             ctx.cgContext.setFillColor(UIColor.gray.cgColor)

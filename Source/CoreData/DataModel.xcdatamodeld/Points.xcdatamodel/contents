@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ImageEntity" representedClassName="ImageEntity" syncable="YES">
+        <attribute name="annotation" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastModified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -26,7 +27,7 @@
         <relationship name="partner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PartnerEntity" inverseName="points" inverseEntity="PartnerEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ImageEntity" positionX="1197" positionY="108" width="128" height="105"/>
+        <element name="ImageEntity" positionX="1197" positionY="108" width="128" height="120"/>
         <element name="PartnerEntity" positionX="1301.96875" positionY="43.4453125" width="128" height="150"/>
         <element name="PointEntity" positionX="1093.3359375" positionY="43.7421875" width="128" height="165"/>
     </elements>

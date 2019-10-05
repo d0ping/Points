@@ -33,8 +33,13 @@ final class ImageProvider: ImageProviderType {
         loader.loadImage(at: url, lastModified: model?.lastModified) { [weak self] result in
             switch result {
             case .success(let image):
-                self?.storage.saveImage(image, with: url.absoluteString.md5, partnerId: partnerId)
-                completion(image)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let annotationImage = UIImage.annotationImage(with: image)
+                    self?.storage.saveImage(image, annotationImage: annotationImage, with: url.absoluteString.md5, partnerId: partnerId)
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
+                }
             case .failure(let error):
                 if case .lastModifiedError = error { print("Image: /(name) not modified") }
                 completion (model?.image)

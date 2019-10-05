@@ -18,6 +18,7 @@ class PointAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     
+    var annotationImage: UIImage?
     var image: UIImage?
     var fullAddress: String?
     var workHours: String?
@@ -29,6 +30,7 @@ class PointAnnotation: NSObject, MKAnnotation {
          partnerId: String?,
          title: String?,
          subtitle: String?,
+         annotationImage: UIImage?,
          image: UIImage?,
          fullAddress: String?,
          workHours: String?,
@@ -38,6 +40,7 @@ class PointAnnotation: NSObject, MKAnnotation {
         self.partnerId = partnerId
         self.title = title
         self.subtitle = subtitle
+        self.annotationImage = annotationImage
         self.image = image
         self.fullAddress = fullAddress
         self.workHours = workHours

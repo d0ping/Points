@@ -12,6 +12,7 @@ import CoreData
 struct ImageModel {
     let identifier: String
     let image: UIImage
+    let annotationImage: UIImage
     let lastModified: Date
 }
 
@@ -22,7 +23,8 @@ extension ImageModel: ManagedObjectConvertable {
         guard let entity = managedObject as? ImageEntity else { throw ManagedObjectConvertableError.invalidManagedObjectType }
         
         self.identifier = entity.identifier ?? ""
-        self.image = UIImage(data: entity.data as Data? ?? Data(capacity: 0)) ?? UIImage()
+        self.image = UIImage(data: entity.data as Data? ?? Data(capacity: 0), scale: UIScreen.main.scale) ?? UIImage()
+        self.annotationImage = UIImage(data: entity.annotation as Data? ?? Data(capacity: 0), scale: UIScreen.main.scale) ?? UIImage()
         self.lastModified =  entity.lastModified as Date? ?? Date()
     }
     
@@ -31,6 +33,7 @@ extension ImageModel: ManagedObjectConvertable {
         
         entity.identifier = self.identifier
         entity.data = self.image.pngData() as NSData?
+        entity.annotation = self.annotationImage.pngData() as NSData?
         entity.lastModified = self.lastModified as NSDate
     }
     

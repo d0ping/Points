@@ -14,7 +14,6 @@ typealias PartnerListModel = ListModel<PartnerModel>
 
 protocol MapInteractorType: class {
     var partners: [PartnerModel] { get }
-    var partnersImages: [String: UIImage] { get }
     func prepareDataIfNeeded(_ completion: @escaping () -> Void)
     func obtainCachedPoints() -> [PointModel]
     func loadPoints(for location: CLLocationCoordinate2D, radius: Int, completion: @escaping ([PointModel]) -> Void)
@@ -34,7 +33,6 @@ final class MapInteractor: MapInteractorType {
     }
     
     var partners: [PartnerModel] { return storageService.allPartners() }
-    var partnersImages: [String: UIImage] = [:]
     
     func prepareDataIfNeeded(_ completion: @escaping () -> Void) {
         guard storageService.partnersIsEmpty else {
@@ -48,16 +46,14 @@ final class MapInteractor: MapInteractorType {
         }
     }
     
-    // TODO: Needs optimizing image preparation
     func preparePartnersImages(_ completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let downloadGroup = DispatchGroup()
             self.partners.forEach { partner in
                 downloadGroup.enter()
-                self.imageProvider.obtainImage(with: partner.picture, partnerId: partner.id, completion: { [weak self] image in
-                    self?.partnersImages[partner.id] = image
+                self.imageProvider.obtainImage(with: partner.picture, partnerId: partner.id) { _ in
                     downloadGroup.leave()
-                })
+                }
             }
             downloadGroup.wait()
             DispatchQueue.main.async {

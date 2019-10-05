@@ -36,7 +36,7 @@ final class PointAnnotationView: MKAnnotationView {
     }
     
     private func update(_ annotation: PointAnnotation) {
-        image = UIImage.annotationImage(with: annotation.image )
+        image = annotation.annotationImage ?? UIImage.defaultAnnotationImage
         clusteringIdentifier = annotation.partnerId
     }
     
