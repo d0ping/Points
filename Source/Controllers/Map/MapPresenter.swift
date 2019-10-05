@@ -68,8 +68,7 @@ final class MapPresenter: NSObject, MapPresenterType {
     }
     
     func moveToCurrentLocation() {
-        loadPointsForCurrentMapRegion()
-//        moveToCurrentLocation(animated: true)
+        moveToCurrentLocation(animated: true)
     }
     
     private func loadPointsForCurrentMapRegion() {
