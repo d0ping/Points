@@ -69,6 +69,27 @@ extension PointModel: ManagedObjectConvertable {
     }
     
     static func updateField<Model, Value>(with keyPath: KeyPath<Model, Value>, value: Value?, managedObject: NSManagedObject, in context: NSManagedObjectContext) throws {
-        
+        guard let keyPath = keyPath as? KeyPath<PointModel, Value> else { throw ManagedObjectConvertableError.invalidKeyPath }
+        guard let object = managedObject as? PointEntity else { throw ManagedObjectConvertableError.invalidManagedObjectType }
+        switch keyPath {
+        case \PointModel.partner:
+            if let prev = object.partner {
+                context.delete(prev)
+                object.partner = nil
+            }
+            if let newModel = value as? PartnerModel {
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PartnerModel.entityName)
+                fetchRequest.predicate = NSPredicate(format: "id == %@", newModel.id)
+                
+                let fetchedObjects = try context.fetch(fetchRequest)
+                let partnerObject = fetchedObjects.first as? PartnerEntity ?? PartnerEntity(context: context)
+                
+                try newModel.fill(managedObject: partnerObject, in: context)
+                object.partner = partnerObject
+                partnerObject.addToPoints(object)
+            }
+        default:
+            break
+        }
     }
 }

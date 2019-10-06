@@ -48,14 +48,14 @@ final class MapInteractor: MapInteractorType {
     
     func preparePartnersImages(_ completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let downloadGroup = DispatchGroup()
+            let loadGroup = DispatchGroup()
             self.partners.forEach { partner in
-                downloadGroup.enter()
+                loadGroup.enter()
                 self.imageProvider.obtainImage(with: partner.picture, partnerId: partner.id) { _ in
-                    downloadGroup.leave()
+                    loadGroup.leave()
                 }
             }
-            downloadGroup.wait()
+            loadGroup.wait()
             DispatchQueue.main.async {
                 completion()
             }
@@ -70,8 +70,12 @@ final class MapInteractor: MapInteractorType {
     
     func loadPoints(for location: CLLocationCoordinate2D, radius: Int, completion: @escaping ([PointModel]) -> Void) {
         loadPoints(location, radius) { [weak self] points in
-            self?.grabUnique(points, completion: completion)
-            self?.storageService.appendPoints(points)
+            self?.filterUnique(points, completion: { uniquePoints in
+                self?.storageService.appendPoints(points, completion: {
+                    let storedPoints = self?.storageService.points(at: uniquePoints.map { $0.externalId })
+                    completion(storedPoints ?? [])
+                })
+            })
         }
     }
     
@@ -102,7 +106,7 @@ final class MapInteractor: MapInteractorType {
         }
     }
     
-    private func grabUnique(_ points: [PointModel], completion: ([PointModel]) -> Void) {
+    private func filterUnique(_ points: [PointModel], completion: ([PointModel]) -> Void) {
         let uniquePoints = points.filter { visiblePointsIds.contains($0.externalId) == false }
         uniquePoints.forEach { visiblePointsIds.insert($0.externalId) }
         completion(uniquePoints)

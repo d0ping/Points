@@ -31,21 +31,6 @@ public struct EntitySearchable {
     }
 }
 
-enum ManagedObjectConvertableError: Error {
-    case invalidManagedObjectType
-    case invalidKeyPath
-}
-
-protocol ManagedObjectConvertable {
-    static var entityName: String { get }
-    init(managedObject: NSManagedObject) throws
-    func fill(managedObject: NSManagedObject, in context: NSManagedObjectContext) throws
-    static func updateField<Model, Value>(with keyPath: KeyPath<Model, Value>,
-                                          value: Value?,
-                                          managedObject: NSManagedObject,
-                                          in context: NSManagedObjectContext) throws
-}
-
 public enum PersistDataBaseSaveResult {
     case success
     case failure(Error)

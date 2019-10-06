@@ -21,6 +21,7 @@
 		A43D7C9323464305009E51CC /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7C9223464305009E51CC /* ImageModel.swift */; };
 		A43D7CB023465587009E51CC /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CAF23465587009E51CC /* DateFormatterExtension.swift */; };
 		A43D7CB223490559009E51CC /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CB123490559009E51CC /* ImageExtension.swift */; };
+		A43D7CB42349667F009E51CC /* ManagedObjectConvertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CB32349667F009E51CC /* ManagedObjectConvertableProtocol.swift */; };
 		A459BD6023395B1000D642A1 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459BD5F23395B1000D642A1 /* MapPresenter.swift */; };
 		A459BD7D2339624800D642A1 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459BD7C2339624800D642A1 /* APIEndpoint.swift */; };
 		A471880C233A7334004FF2E0 /* AppScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471880B233A7334004FF2E0 /* AppScreenFactory.swift */; };
@@ -66,6 +67,7 @@
 		A43D7C9223464305009E51CC /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		A43D7CAF23465587009E51CC /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		A43D7CB123490559009E51CC /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		A43D7CB32349667F009E51CC /* ManagedObjectConvertableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectConvertableProtocol.swift; sourceTree = "<group>"; };
 		A459BD5F23395B1000D642A1 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		A459BD7C2339624800D642A1 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		A471880B233A7334004FF2E0 /* AppScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenFactory.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				A426990A233FFC9D0089632C /* PersistDataBase.swift */,
+				A43D7CB32349667F009E51CC /* ManagedObjectConvertableProtocol.swift */,
 			);
 			path = PersistDataBase;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				A4269907233FEBF10089632C /* MapInteractor.swift in Sources */,
 				A43D7C9023464287009E51CC /* ImageEntity+CoreDataClass.swift in Sources */,
 				A48CAF462344F60700C3B754 /* StringUtils.swift in Sources */,
+				A43D7CB42349667F009E51CC /* ManagedObjectConvertableProtocol.swift in Sources */,
 				A48C3FF4234313D500CA8DC1 /* MapRouter.swift in Sources */,
 				A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */,
 				A48703BC2337FAC6009A196A /* APIService.swift in Sources */,
