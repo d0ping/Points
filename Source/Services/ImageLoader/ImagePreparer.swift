@@ -40,7 +40,7 @@ final class ImagePreparer: ImagePreparerType {
     }
     
     private func updateAndStoreImageIfNeeded(for partner: PartnerModel, completion: @escaping () -> Void) {
-        guard let url = urlBuilder.imageURL(with: partner.name) else {
+        guard let url = urlBuilder.imageURL(with: partner.picture) else {
             completion()
             return
         }
@@ -51,9 +51,10 @@ final class ImagePreparer: ImagePreparerType {
             case .success(let image):
                 DispatchQueue.global(qos: .userInitiated).async {
                     let annotationImage = UIImage.annotationImage(with: image)
-                    self?.storage.saveImage(image, annotationImage: annotationImage, with: url.absoluteString.md5, partnerId: partner.id)
-                    DispatchQueue.main.async {
-                        completion()
+                    self?.storage.saveImage(image, annotationImage: annotationImage, with: url.absoluteString.md5, partnerId: partner.id) {
+                        DispatchQueue.main.async {
+                            completion()
+                        }
                     }
                 }
             case .failure(let error):

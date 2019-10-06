@@ -17,7 +17,7 @@ protocol StorageServiceType: class {
     func allPoints() -> [PointModel]
     func points(at identifiers: [String]) -> [PointModel]
     func partners(at identifiers: [String]) -> [PartnerModel]
-    func saveImage(_ image: UIImage, annotationImage: UIImage, with identifiier: String, partnerId: String)
+    func saveImage(_ image: UIImage, annotationImage: UIImage, with identifiier: String, partnerId: String, completion: @escaping () -> Void)
     func fetchImage(at identifier: String) -> ImageModel?
 }
 
@@ -84,12 +84,14 @@ final class StorageService: StorageServiceType {
     }
     
     // MARK: Images
-    func saveImage(_ image: UIImage, annotationImage: UIImage, with identifiier: String, partnerId: String) {
+    func saveImage(_ image: UIImage, annotationImage: UIImage, with identifiier: String, partnerId: String, completion: @escaping () -> Void) {
         let model = ImageModel(identifier: identifiier, image: image, annotationImage: annotationImage, lastModified: Date())
         save(model) { [weak self] result in
             if case .success = result {
-                self?.associate(model, with: partnerId, completion: nil)
-            }
+                self?.associate(model, with: partnerId) { _ in
+                    completion()
+                }
+            } else { completion() }
         }
     }
     
