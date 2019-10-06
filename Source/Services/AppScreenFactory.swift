@@ -30,7 +30,7 @@ class AppScreenFactory: AppScreenFactoryType {
     private func makeMapInteractor() -> MapInteractorType {
         return MapInteractor(apiService: serviceFactory.apiService,
                              storageService: serviceFactory.storageService,
-                             imageProvider: serviceFactory.makeImageProvider())
+                             imagePreparer: serviceFactory.makeImagePreparer())
     }
     
     private func makeMapAnnotationBuilder() -> MapAnnotationBuilderType {

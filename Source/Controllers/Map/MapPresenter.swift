@@ -83,7 +83,7 @@ final class MapPresenter: NSObject, MapPresenterType {
     
     private func addAnnotations(at points: [PointModel]) {
         guard let mapView = mapView else { return }
-        mapView.addAnnotations(builder.buildAnnotations(at: points, partners: interactor.partners))
+        mapView.addAnnotations(builder.buildAnnotations(at: points))
     }
     
     private func visibleRegionRadius(at region: MKCoordinateRegion) -> CLLocationDistance {

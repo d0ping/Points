@@ -13,7 +13,6 @@ typealias PointListModel = ListModel<PointModel>
 typealias PartnerListModel = ListModel<PartnerModel>
 
 protocol MapInteractorType: class {
-    var partners: [PartnerModel] { get }
     func prepareDataIfNeeded(_ completion: @escaping () -> Void)
     func obtainCachedPoints() -> [PointModel]
     func loadPoints(for location: CLLocationCoordinate2D, radius: Int, completion: @escaping ([PointModel]) -> Void)
@@ -22,43 +21,26 @@ protocol MapInteractorType: class {
 final class MapInteractor: MapInteractorType {
     private let apiService: APIServiceType
     private let storageService: StorageServiceType
-    private let imageProvider: ImageProviderType
+    private let imagePreparer: ImagePreparerType
     
     private var visiblePointsIds: Set<String> = []
     
-    init(apiService: APIServiceType, storageService: StorageServiceType, imageProvider: ImageProviderType) {
+    init(apiService: APIServiceType, storageService: StorageServiceType, imagePreparer: ImagePreparerType) {
         self.apiService = apiService
         self.storageService = storageService
-        self.imageProvider = imageProvider
+        self.imagePreparer = imagePreparer
     }
-    
-    var partners: [PartnerModel] { return storageService.allPartners() }
     
     func prepareDataIfNeeded(_ completion: @escaping () -> Void) {
         guard storageService.partnersIsEmpty else {
-            preparePartnersImages(completion)
+            imagePreparer.prepareImages(for: storageService.allPartners(),
+                                        completion: completion)
             return
         }
         
         loadPartners { [weak self] partners in
             self?.storageService.appendPartners(partners)
-            self?.preparePartnersImages(completion)
-        }
-    }
-    
-    func preparePartnersImages(_ completion: @escaping () -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let loadGroup = DispatchGroup()
-            self.partners.forEach { partner in
-                loadGroup.enter()
-                self.imageProvider.obtainImage(with: partner.picture, partnerId: partner.id) { _ in
-                    loadGroup.leave()
-                }
-            }
-            loadGroup.wait()
-            DispatchQueue.main.async {
-                completion()
-            }
+            self?.imagePreparer.prepareImages(for: partners, completion: completion)
         }
     }
     

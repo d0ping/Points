@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A41E1D2023463BC10072DC1A /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E1D1F23463BC10072DC1A /* ImageProvider.swift */; };
+		A41E1D2023463BC10072DC1A /* ImagePreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E1D1F23463BC10072DC1A /* ImagePreparer.swift */; };
 		A41E1D2E234640650072DC1A /* JSONObjectDecodableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E1D2D234640650072DC1A /* JSONObjectDecodableProtocol.swift */; };
 		A4269905233FE4540089632C /* PartnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4269904233FE4540089632C /* PartnerModel.swift */; };
 		A4269907233FEBF10089632C /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4269906233FEBF10089632C /* MapInteractor.swift */; };
@@ -52,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A41E1D1F23463BC10072DC1A /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		A41E1D1F23463BC10072DC1A /* ImagePreparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreparer.swift; sourceTree = "<group>"; };
 		A41E1D2D234640650072DC1A /* JSONObjectDecodableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONObjectDecodableProtocol.swift; sourceTree = "<group>"; };
 		A4269904233FE4540089632C /* PartnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModel.swift; sourceTree = "<group>"; };
 		A4269906233FEBF10089632C /* MapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 			children = (
 				A48CAF482345199D00C3B754 /* ImageLoaderService.swift */,
 				A48CAF4A234519B300C3B754 /* ImageURLBuilder.swift */,
-				A41E1D1F23463BC10072DC1A /* ImageProvider.swift */,
+				A41E1D1F23463BC10072DC1A /* ImagePreparer.swift */,
 			);
 			path = ImageLoader;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				A459BD6023395B1000D642A1 /* MapPresenter.swift in Sources */,
 				A4EEF8B423401AE20003EAB9 /* DataModel.xcdatamodeld in Sources */,
 				A48C3FF02342C6F800CA8DC1 /* PointAnnotationView.swift in Sources */,
-				A41E1D2023463BC10072DC1A /* ImageProvider.swift in Sources */,
+				A41E1D2023463BC10072DC1A /* ImagePreparer.swift in Sources */,
 				A4BCB1B3233C020700F4CE69 /* ListModel.swift in Sources */,
 				A43D7C8D234641D9009E51CC /* PartnerEntity+CoreDataProperties.swift in Sources */,
 				A48703BE2337FB17009A196A /* StorageSevice.swift in Sources */,

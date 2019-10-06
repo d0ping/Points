@@ -12,7 +12,7 @@ protocol AppServiceFactoryType: class {
     var apiService: APIServiceType { get }
     var storageService: StorageServiceType { get }
     var locationService: LocationServiceType { get }
-    func makeImageProvider() -> ImageProviderType
+    func makeImagePreparer() -> ImagePreparerType
 }
 
 class AppServiceFactory: AppServiceFactoryType {
@@ -22,9 +22,9 @@ class AppServiceFactory: AppServiceFactoryType {
     lazy var storageService: StorageServiceType = StorageService(dataBase: PersistDataBase())
     lazy var locationService: LocationServiceType = LocationService()
     
-    func makeImageProvider() -> ImageProviderType {
+    func makeImagePreparer() -> ImagePreparerType {
         let urlBuilder = ImageURLBuilder(configuration: defaultAPIConfiguration)
-        return ImageProvider(loader: ImageLoaderService(),
+        return ImagePreparer(loader: ImageLoaderService(),
                              storage: storageService,
                              urlBuilder: urlBuilder)
     }
