@@ -13,7 +13,7 @@ protocol MapAnnotationBuilderType: class {
     func buildAnnotations(at points: [PointModel]) -> [PointAnnotation]
 }
 
-class MapAnnotationBuilder: MapAnnotationBuilderType {
+final class MapAnnotationBuilder: MapAnnotationBuilderType {
     func buildAnnotations(at points: [PointModel]) -> [PointAnnotation] {
         return points.map { point in
             return PointAnnotation(coordinate: point.location,

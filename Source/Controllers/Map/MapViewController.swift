@@ -20,18 +20,12 @@ final class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureModule()
-        setupMapViewUI()
     }
     
     private func configureModule() {
         presenter = screenFactory.makeMapPresenter()
         presenter?.setup(self.mapView)
-    }
-    
-    private func setupMapViewUI() {
-        //
     }
   
     // MARK: - Actions
@@ -44,6 +38,6 @@ final class MapViewController: UIViewController {
     }
     
     @IBAction func locationButtonDidSelect(_ sender: UIButton) {
-        presenter?.moveToCurrentLocation()
+        presenter?.moveToCurrentLocation(animated: true)
     }
 }

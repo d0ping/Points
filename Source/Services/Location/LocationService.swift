@@ -18,11 +18,8 @@ protocol LocationServiceObserverType: class {
     func didUpdateCurrentLocations(_ location: CLLocation)
 }
 
-class LocationService: NSObject, LocationServiceType {
+final class LocationService: NSObject, LocationServiceType {
     var currentLocation: CLLocation?
-    
-//    private let LocationLongitudeKey = "LocationLatitudeKey"
-//    private let LocationLatitudeKey = "LocationLatitudeKey"
     
     private let locationManager = CLLocationManager()
     private var observers: [LocationServiceObserverType] = []
@@ -50,8 +47,6 @@ class LocationService: NSObject, LocationServiceType {
 extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
         guard let location = manager.location ?? locations.last else { return }
         currentLocation = location
         observers.forEach {

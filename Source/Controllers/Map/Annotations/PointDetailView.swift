@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PointDetailView: UIView {
+final class PointDetailView: UIView {
     
     @IBOutlet weak var logoImageView: UIImageView!
     

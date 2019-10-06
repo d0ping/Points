@@ -66,8 +66,8 @@ final class MapInteractor: MapInteractorType {
         apiService.request(endpoint) { result in
             switch result {
             case .success(let json):
-                guard let modelList = PartnerListModel(jsonObject: json) else { return }
-                completion(modelList.payload)
+                let partners = PartnerListModel(jsonObject: json)?.payload ?? []
+                completion(partners)
             case _: break
             }
         }
@@ -78,9 +78,8 @@ final class MapInteractor: MapInteractorType {
         apiService.request(endpoint) { result in
             switch result {
             case .success(let json):
-                guard let modelList = PointListModel(jsonObject: json) else { return }
-                print("--- count \(modelList.payload.count)")
-                completion(modelList.payload)
+                let points = PointListModel(jsonObject: json)?.payload ?? []
+                completion(points)
             case _:
                 completion([])
                 break

@@ -8,7 +8,7 @@
 
 import MapKit
 
-class PointAnnotation: NSObject, MKAnnotation {
+final class PointAnnotation: NSObject, MKAnnotation {
     
     static let reuseIdentifier = NSStringFromClass(PointAnnotation.self) as String
     

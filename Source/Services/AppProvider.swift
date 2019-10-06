@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AppProvider {
+final class AppProvider {
     let serviceFactory: AppServiceFactoryType
     let screenFactory: AppScreenFactoryType
     
@@ -21,8 +21,10 @@ class AppProvider {
     private init(serviceFactory: AppServiceFactoryType, screenFactory: AppScreenFactoryType) {
         self.serviceFactory = serviceFactory
         self.screenFactory = screenFactory
-        
-        let cache = URLCache(memoryCapacity: 4*1024*1024, diskCapacity: 40*1024*1024, diskPath: nil)
-        URLCache.shared = cache
+        self.setup()
+    }
+    
+    private func setup() {
+        serviceFactory.settingsManager.setupDefaultSettings()
     }
 }

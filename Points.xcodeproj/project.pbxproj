@@ -22,6 +22,7 @@
 		A43D7CB023465587009E51CC /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CAF23465587009E51CC /* DateFormatterExtension.swift */; };
 		A43D7CB223490559009E51CC /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CB123490559009E51CC /* ImageExtension.swift */; };
 		A43D7CB42349667F009E51CC /* ManagedObjectConvertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D7CB32349667F009E51CC /* ManagedObjectConvertableProtocol.swift */; };
+		A4580774234A64F8008594E6 /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4580773234A64F7008594E6 /* AppSettingsManager.swift */; };
 		A459BD6023395B1000D642A1 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459BD5F23395B1000D642A1 /* MapPresenter.swift */; };
 		A459BD7D2339624800D642A1 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459BD7C2339624800D642A1 /* APIEndpoint.swift */; };
 		A471880C233A7334004FF2E0 /* AppScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471880B233A7334004FF2E0 /* AppScreenFactory.swift */; };
@@ -42,7 +43,7 @@
 		A48C3FF22342C6F800CA8DC1 /* PointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */; };
 		A48C3FF4234313D500CA8DC1 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48C3FF3234313D500CA8DC1 /* MapRouter.swift */; };
 		A48CAF462344F60700C3B754 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF452344F60700C3B754 /* StringUtils.swift */; };
-		A48CAF492345199D00C3B754 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF482345199D00C3B754 /* ImageLoaderService.swift */; };
+		A48CAF492345199D00C3B754 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF482345199D00C3B754 /* ImageLoader.swift */; };
 		A48CAF4B234519B300C3B754 /* ImageURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF4A234519B300C3B754 /* ImageURLBuilder.swift */; };
 		A48CAF4D23451C0F00C3B754 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48CAF4C23451C0F00C3B754 /* APIConfiguration.swift */; };
 		A4BCB1B1233C00F400F4CE69 /* PointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCB1B0233C00F400F4CE69 /* PointModel.swift */; };
@@ -68,6 +69,7 @@
 		A43D7CAF23465587009E51CC /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		A43D7CB123490559009E51CC /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		A43D7CB32349667F009E51CC /* ManagedObjectConvertableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectConvertableProtocol.swift; sourceTree = "<group>"; };
+		A4580773234A64F7008594E6 /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
 		A459BD5F23395B1000D642A1 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		A459BD7C2339624800D642A1 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		A471880B233A7334004FF2E0 /* AppScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenFactory.swift; sourceTree = "<group>"; };
@@ -90,7 +92,7 @@
 		A48C3FEE2342C6F800CA8DC1 /* PointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointAnnotation.swift; sourceTree = "<group>"; };
 		A48C3FF3234313D500CA8DC1 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		A48CAF452344F60700C3B754 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
-		A48CAF482345199D00C3B754 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
+		A48CAF482345199D00C3B754 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		A48CAF4A234519B300C3B754 /* ImageURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLBuilder.swift; sourceTree = "<group>"; };
 		A48CAF4C23451C0F00C3B754 /* APIConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		A4BCB1B0233C00F400F4CE69 /* PointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointModel.swift; sourceTree = "<group>"; };
@@ -193,10 +195,10 @@
 		A48703B52337F881009A196A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A471880F233A7B2F004FF2E0 /* ViewControllerExtension.swift */,
-				A48CAF452344F60700C3B754 /* StringUtils.swift */,
 				A43D7CAF23465587009E51CC /* DateFormatterExtension.swift */,
+				A471880F233A7B2F004FF2E0 /* ViewControllerExtension.swift */,
 				A43D7CB123490559009E51CC /* ImageExtension.swift */,
+				A48CAF452344F60700C3B754 /* StringUtils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +217,7 @@
 				A471880D233A7516004FF2E0 /* AppProvider.swift */,
 				A48703C1233951B9009A196A /* AppServiceFactory.swift */,
 				A471880B233A7334004FF2E0 /* AppScreenFactory.swift */,
+				A4580773234A64F7008594E6 /* AppSettingsManager.swift */,
 				A48703B92337FAB1009A196A /* API */,
 				A4718811233A814F004FF2E0 /* Location */,
 				A48703BA2337FAB1009A196A /* Storage */,
@@ -269,7 +272,7 @@
 		A48CAF472345197C00C3B754 /* ImageLoader */ = {
 			isa = PBXGroup;
 			children = (
-				A48CAF482345199D00C3B754 /* ImageLoaderService.swift */,
+				A48CAF482345199D00C3B754 /* ImageLoader.swift */,
 				A48CAF4A234519B300C3B754 /* ImageURLBuilder.swift */,
 				A41E1D1F23463BC10072DC1A /* ImagePreparer.swift */,
 			);
@@ -366,7 +369,7 @@
 				A48703C023394D39009A196A /* MapViewController.swift in Sources */,
 				A43D7C8C234641D9009E51CC /* PartnerEntity+CoreDataClass.swift in Sources */,
 				A459BD7D2339624800D642A1 /* APIEndpoint.swift in Sources */,
-				A48CAF492345199D00C3B754 /* ImageLoaderService.swift in Sources */,
+				A48CAF492345199D00C3B754 /* ImageLoader.swift in Sources */,
 				A43D7C9323464305009E51CC /* ImageModel.swift in Sources */,
 				A43D7C9123464287009E51CC /* ImageEntity+CoreDataProperties.swift in Sources */,
 				A43D7C8F234641D9009E51CC /* PointEntity+CoreDataProperties.swift in Sources */,
@@ -390,6 +393,7 @@
 				A43D7C8D234641D9009E51CC /* PartnerEntity+CoreDataProperties.swift in Sources */,
 				A48703BE2337FB17009A196A /* StorageSevice.swift in Sources */,
 				A426990B233FFC9D0089632C /* PersistDataBase.swift in Sources */,
+				A4580774234A64F8008594E6 /* AppSettingsManager.swift in Sources */,
 				A4269905233FE4540089632C /* PartnerModel.swift in Sources */,
 				A41E1D2E234640650072DC1A /* JSONObjectDecodableProtocol.swift in Sources */,
 				A4718810233A7B2F004FF2E0 /* ViewControllerExtension.swift in Sources */,

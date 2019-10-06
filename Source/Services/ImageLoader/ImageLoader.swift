@@ -13,11 +13,11 @@ enum ImageDownloadResult {
     case failure(APIError)
 }
 
-protocol ImageLoaderServiceType {
+protocol ImageLoaderType {
     func loadImage(at url: URL, lastModified: Date?, handler: @escaping (ImageDownloadResult) -> Void)
 }
 
-class ImageLoaderService: ImageLoaderServiceType {
+final class ImageLoader: ImageLoaderType {
     private func makeURLSession(with lastModified: Date?) -> URLSession {
         guard let date = lastModified else { return URLSession(configuration: .default) }
         let dateString = DateFormatter.apiDateFormatter().string(from: date)
@@ -57,4 +57,3 @@ class ImageLoaderService: ImageLoaderServiceType {
         task.resume()
     }
 }
-

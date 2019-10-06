@@ -11,10 +11,9 @@ import MapKit
 
 protocol MapPresenterType: class {
     func setup(_ mapView: MKMapView)
-    
     func zoomIn()
     func zoomOut()
-    func moveToCurrentLocation()
+    func moveToCurrentLocation(animated: Bool)
 }
 
 final class MapPresenter: NSObject, MapPresenterType {
@@ -67,8 +66,11 @@ final class MapPresenter: NSObject, MapPresenterType {
         mapView?.setRegion(region, animated: true)
     }
     
-    func moveToCurrentLocation() {
-        moveToCurrentLocation(animated: true)
+    func moveToCurrentLocation(animated: Bool) {
+        guard let mapView = mapView, let center = locationService.currentLocation?.coordinate else { return }
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated: animated)
     }
     
     private func loadPointsForCurrentMapRegion() {
@@ -100,13 +102,6 @@ extension MapPresenter: LocationServiceObserverType {
         if isFirstPositioningDone { return }
         moveToCurrentLocation(animated: true)
         isFirstPositioningDone = true
-    }
-    
-    private func moveToCurrentLocation(animated: Bool) {
-        guard let mapView = mapView, let center = locationService.currentLocation?.coordinate else { return }
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: center, span: span)
-        mapView.setRegion(region, animated: animated)
     }
 }
 

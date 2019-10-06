@@ -13,11 +13,11 @@ protocol ImagePreparerType: class {
 }
 
 final class ImagePreparer: ImagePreparerType {
-    private let loader: ImageLoaderServiceType
+    private let loader: ImageLoaderType
     private let storage: StorageServiceType
     private let urlBuilder: ImageURLBuilderType
     
-    init(loader: ImageLoaderServiceType, storage: StorageServiceType, urlBuilder: ImageURLBuilderType) {
+    init(loader: ImageLoaderType, storage: StorageServiceType, urlBuilder: ImageURLBuilderType) {
         self.loader = loader
         self.storage = storage
         self.urlBuilder = urlBuilder

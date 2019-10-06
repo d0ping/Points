@@ -12,7 +12,7 @@ protocol AppScreenFactoryType: class {
     func makeMapPresenter() -> MapPresenterType
 }
 
-class AppScreenFactory: AppScreenFactoryType {
+final class AppScreenFactory: AppScreenFactoryType {
     private let serviceFactory: AppServiceFactoryType
     
     init(serviceFactory: AppServiceFactoryType) {

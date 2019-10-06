@@ -36,7 +36,7 @@ extension UIImage {
                                                                        y: size.height > size.width  ? floor((size.height - size.width) / 2) : 0),
                                                        size: canvasSize))
             UIBezierPath(ovalIn: canvasRect).addClip()
-            UIImage(cgImage: cgImage!, scale: 1, orientation: imageOrientation).draw(in: canvasRect)
+            UIImage(cgImage: cgImage!, scale: UIScreen.main.scale, orientation: imageOrientation).draw(in: canvasRect)
         }
     }
 }
